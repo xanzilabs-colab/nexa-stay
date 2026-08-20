@@ -9,7 +9,8 @@
     "lint": "eslint",
     "import:listings": "node scripts/import-listings.mjs",
     "upload:site-assets": "node scripts/upload-site-assets.mjs",
-    "upload:agent-images": "node scripts/upload-agent-images.mjs"
+    "upload:agent-images": "node scripts/upload-agent-images.mjs",
+    "import:agents": "node scripts/import-additional-agents.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.4",
