@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local scraped source artifact; contains third-party page configuration and is not runtime content.
+/public/media/Ellipse Waterfall/Ellipse Waterfall Executive Apartments, Midrand (updated prices 2026).html

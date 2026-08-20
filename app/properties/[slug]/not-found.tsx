@@ -1,0 +1,2 @@
+import { ErrorScreen } from "@/components/error-screen";
+export default function PropertyNotFound() { return <ErrorScreen title="This stay is no longer available." message="The property may have been removed or the link may be out of date. Find another place that fits." />; }

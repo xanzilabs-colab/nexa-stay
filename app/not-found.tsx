@@ -1,0 +1,2 @@
+import { ErrorScreen } from "@/components/error-screen";
+export default function NotFound() { return <ErrorScreen title="This page has moved on." message="We could not find the page you were looking for. Browse our available stays instead." />; }

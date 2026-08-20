@@ -1,0 +1,1 @@
+export default function AdminLoading() { return <main className="page-loading admin-loading" aria-label="Loading admin"><span className="loading-spinner" /><p>Loading admin workspace</p></main>; }

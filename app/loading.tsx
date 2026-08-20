@@ -1,0 +1,1 @@
+export default function Loading() { return <main className="page-loading" aria-label="Loading page"><span className="loading-spinner" /><p>Loading NexaStay</p></main>; }

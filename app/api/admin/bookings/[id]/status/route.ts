@@ -1,0 +1,5 @@
+import { NextResponse } from "next/server";
+import { isAdminSession } from "@/lib/admin-auth";
+import { createAdminClient } from "@/lib/supabase/admin";
+const statuses=["new","contacted","confirmed","cancelled","completed"];
+export async function PATCH(request:Request,{params}:{params:Promise<{id:string}>}){if(!await isAdminSession())return NextResponse.json({error:"Unauthorized"},{status:401});const {status}=await request.json();if(!statuses.includes(status))return NextResponse.json({error:"Invalid status"},{status:400});const supabase=createAdminClient();if(!supabase)return NextResponse.json({error:"Supabase unavailable"},{status:503});const {error}=await supabase.from("bookings").update({status}).eq("id",(await params).id);if(error)return NextResponse.json({error:"Unable to update status"},{status:500});return NextResponse.json({ok:true})}

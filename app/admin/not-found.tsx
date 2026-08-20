@@ -1,0 +1,2 @@
+import { ErrorScreen } from "@/components/error-screen";
+export default function AdminNotFound() { return <ErrorScreen admin title="This admin page was not found." message="Return to the overview to manage current enquiries and settings." />; }

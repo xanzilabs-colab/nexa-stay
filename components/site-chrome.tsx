@@ -1,0 +1,9 @@
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import { Menu } from "lucide-react";
+import { useRef } from "react";
+import { useRouter } from "next/navigation";
+import { siteAsset } from "@/lib/site-assets";
+export function Header(){const router=useRouter();const clicks=useRef(0);const timer=useRef<ReturnType<typeof setTimeout>|null>(null);function logoClick(){clicks.current+=1;if(timer.current)clearTimeout(timer.current);if(clicks.current===3){clicks.current=0;router.push("/admin/login");return}timer.current=setTimeout(()=>{if(clicks.current===1)router.push("/");clicks.current=0},550)}return <header><button type="button" className="logo" onClick={logoClick} aria-label="NexaStay home"><Image src={siteAsset("logo.png")} alt="NexaStay" width={72} height={72} priority/></button><nav><Link href="/properties">Properties</Link><Link href="/agents">Agents</Link><Link href="/about">About</Link><Link href="/contact">Contact</Link></nav><Link className="button navy header-cta" href="/properties">Find a stay</Link><button className="menu" aria-label="Open menu"><Menu/></button></header>}
+export function Footer(){return <footer><div><Image src={siteAsset("logo.png")} alt="NexaStay" width={64} height={64}/><p>Thoughtful short-term stays across South Africa.</p></div><div><p>Explore</p><Link href="/properties">Properties</Link><Link href="/agents">Our agents</Link><Link href="/contact">Contact</Link></div><div><p>Contact</p><a href="mailto:hello@nexastay.co.za">hello@nexastay.co.za</a><a href="https://wa.me/27000000000">WhatsApp us</a></div><small>© {new Date().getFullYear()} NexaStay. All rights reserved.</small></footer>}

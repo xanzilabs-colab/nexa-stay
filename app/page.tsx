@@ -1,69 +1,20 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Check, MapPin } from "lucide-react";
+import { getAgents, getProperties } from "@/lib/data";
+import { PropertyCard } from "@/components/property-card";
+import { HeroMedia } from "@/components/hero-media";
+import { siteAsset } from "@/lib/site-assets";
+import { HeroSearch } from "@/components/hero-search";
 
-export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+export default async function Home() {
+  const [properties, agents] = await Promise.all([getProperties(), getAgents()]);
+  return <main>
+    <section className="hero"><HeroMedia /><div className="hero-shade" /><div className="hero-copy"><p className="eyebrow light">SHORT-TERM STAYS, SOUTH AFRICA</p><h1>Find your place<br />to stay.</h1><p>Beautifully considered homes, apartments, and escapes in the places you want to be.</p></div><HeroSearch /></section>
+    <section className="section featured"><div className="section-heading"><div><p className="eyebrow">CURATED FOR YOU</p><h2>Featured stays</h2></div><Link href="/properties" className="text-link">View all properties <ArrowRight size={17} /></Link></div><div className="property-scroll">{properties.filter(p => p.featured).slice(0, 6).map(property => <PropertyCard property={property} key={property.id} />)}</div></section>
+    <section className="section showcase"><div className="section-heading"><div><p className="eyebrow">NEXASTAY MOMENTS</p><h2>A glimpse of the good life.</h2></div><p className="showcase-note">Thoughtful stays. Lasting memories.</p></div><div className="showcase-grid"><figure className="showcase-feature"><Image src={siteAsset("ssstik.io_1787129766769.jpg")} alt="NexaStay lifestyle showcase" fill sizes="(max-width: 700px) 100vw, 48vw" /></figure><figure className="showcase-tall"><video autoPlay muted loop playsInline aria-label="NexaStay lifestyle video"><source src={siteAsset("ssstik.io_@nexastay_1787129668516.mp4")} type="video/mp4" /></video></figure><figure className="showcase-small"><video autoPlay muted loop playsInline aria-label="NexaStay lifestyle video"><source src={siteAsset("ssstik.io_@nexastay_1787129712411.mp4")} type="video/mp4" /></video></figure><figure className="showcase-small"><Image src={siteAsset("ssstik.io_1787129777366.jpg")} alt="NexaStay lifestyle showcase" fill sizes="(max-width: 700px) 50vw, 24vw" /></figure><figure className="showcase-quote"><Image src={siteAsset("ssstik.io_1787129780726.jpg")} alt="NexaStay lifestyle showcase" fill sizes="(max-width: 700px) 50vw, 24vw" /><figcaption>Stay a little<br /><em>longer.</em></figcaption></figure></div><div className="showcase-more"><p>More to discover</p><div className="showcase-more-rail">{["ssstik.io_1787129784653.jpg","ssstik.io_1787129788033.jpg","ssstik.io_1787129791608.jpg","ssstik.io_1787129794938.jpg"].map((image, index) => <figure key={image}><Image src={siteAsset(image)} alt={`NexaStay lifestyle showcase ${index + 6}`} fill sizes="(max-width: 700px) 68vw, 260px" /></figure>)}</div></div></section>
+    <section className="section reasons"><p className="eyebrow">THE NEXASTAY DIFFERENCE</p><h2>Stays, made simpler.</h2><div className="reason-grid">{[["Verified stays","Every home is clearly presented, so you know what to expect."],["Local people","Get help from a real local agent when it matters."],["Simple enquiries","Find a stay and make a request in just a few minutes."],["South Africa focused","A collection shaped around the places people love here."]].map(([title, text]) => <article key={title}><Check size={20}/><h3>{title}</h3><p>{text}</p></article>)}</div></section>
+    <section className="section agents-preview"><div className="section-heading"><div><p className="eyebrow">HERE TO HELP</p><h2>Meet your local experts</h2></div><Link href="/agents" className="text-link">Meet all agents <ArrowRight size={17} /></Link></div><div className="agent-row">{agents.map(agent => <article className="agent-card" key={agent.id}>{agent.image_url ? <Image src={agent.image_url} alt={agent.name} width={400} height={480}/> : <div className="agent-image-pending">{agent.name.split(" ").map((part: string) => part[0]).join("")}</div>}<div><p className="eyebrow">{agent.position}</p><h3>{agent.name}</h3><p><MapPin size={15}/> South Africa</p><Link href={`/agents/${agent.slug}`}>View profile</Link></div></article>)}</div></section>
+    <section className="final-cta"><p className="eyebrow light">YOUR NEXT ESCAPE</p><h2>Your next stay is<br />closer than you think.</h2><Link className="button teal" href="/properties">Explore properties <ArrowRight size={18}/></Link></section>
+  </main>;
 }
