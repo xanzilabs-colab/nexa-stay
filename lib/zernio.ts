@@ -4,7 +4,13 @@ const baseUrl = "https://zernio.com/api/v1";
 
 type WhatsAppSettings = { accountId: string; profileId: string };
 
-function normalizePhone(value: string) { return value.replace(/\D/g, ""); }
+export function normalizeWhatsAppNumber(value: string) {
+  const digits = value.replace(/\D/g, "");
+  if (digits.startsWith("27") && digits.length === 11) return digits;
+  if (digits.startsWith("0") && digits.length === 10) return `27${digits.slice(1)}`;
+  if (digits.length === 9) return `27${digits}`;
+  return digits;
+}
 
 async function settings(): Promise<WhatsAppSettings> {
   const supabase = createAdminClient();
@@ -27,7 +33,9 @@ export async function getWhatsAppSettings() { return settings(); }
 export async function sendWhatsAppMessage({ to, message, file }: { to: string; message: string; file?: File | null }) {
   const { accountId } = await settings();
   if (!accountId) throw new Error("Set a Zernio WhatsApp account ID in Admin settings first.");
-  const created = await zernio("/inbox/conversations", { method: "POST", headers: { "Content-Type": "application/json", "Idempotency-Key": crypto.randomUUID() }, body: JSON.stringify({ accountId, participantId: normalizePhone(to), message, category: "utility" }) });
+  const recipient = normalizeWhatsAppNumber(to);
+  if (recipient.length < 10 || recipient.length > 15) throw new Error("Enter a valid WhatsApp number with country code.");
+  const created = await zernio("/inbox/conversations", { method: "POST", headers: { "Content-Type": "application/json", "Idempotency-Key": crypto.randomUUID() }, body: JSON.stringify({ accountId, participantId: recipient, message, category: "utility" }) });
   const conversationId = created.conversation?.id ?? created.conversationId ?? created.id;
   if (file && conversationId) {
     if (file.size > 25 * 1024 * 1024) throw new Error("Attachments must be 25 MB or smaller.");

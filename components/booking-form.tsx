@@ -20,6 +20,7 @@ export function BookingForm({ propertyId, propertyName }: { propertyId: string; 
   const [reference, setReference] = useState("");
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
   const [copied, setCopied] = useState(false);
   const today = new Date().toISOString().slice(0, 10);
 
@@ -50,7 +51,7 @@ export function BookingForm({ propertyId, propertyName }: { propertyId: string; 
     <input type="hidden" name="propertyId" value={propertyId} />
     <div className="two-col"><label>First name<input name="firstName" required /></label><label>Last name<input name="lastName" required /></label></div>
     <label>Email<input name="email" type="email" autoComplete="email" required /></label>
-    <div className="two-col"><label>Phone<input name="phone" type="tel" autoComplete="tel" required /></label><label>WhatsApp number<input name="whatsapp" type="tel" autoComplete="tel" required /></label></div>
+    <div className="two-col"><label>Phone<input name="phone" type="tel" autoComplete="tel" required /></label><label>WhatsApp number<input name="whatsapp" type="tel" value={whatsapp} onChange={(event) => setWhatsapp(event.target.value.replace(/[^0-9+\s()-]/g, ""))} placeholder="+27 73 088 4239" autoComplete="tel" required /><small className="number-help">Use a South African mobile number, for example +27 73 088 4239.</small></label></div>
     <div className="booking-date-note"><CalendarDays size={17} /> Enquiries are available for stays up to 5 nights.</div>
     <div className="two-col"><DatePicker name="checkIn" label="Check-in" value={checkIn} min={today} onChange={(value) => { setCheckIn(value); setCheckOut(""); }} /><DatePicker name="checkOut" label="Check-out" value={checkOut} min={addDays(checkIn, 1)} max={addDays(checkIn, 5)} disabled={!checkIn} onChange={setCheckOut} /></div>
     <div className="two-col"><label>Guests<input name="guests" type="number" min="1" required /></label><label>Preferred contact<CustomSelect name="contactPreference" defaultValue="whatsapp" ariaLabel="Preferred contact method" options={[{ label: "WhatsApp", value: "whatsapp" }, { label: "Phone", value: "phone" }, { label: "Email", value: "email" }]} /></label></div>
