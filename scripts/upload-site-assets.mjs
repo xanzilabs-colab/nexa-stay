@@ -12,7 +12,7 @@ const key = environmentValue("SUPABASE_SERVICE_ROLE_KEY");
 if (!url || !key) throw new Error("Supabase URL and service role key are required.");
 const supabase = createClient(url, key, { auth: { autoRefreshToken: false, persistSession: false } });
 const mediaRoot = join(process.cwd(), "public", "media");
-const rootFiles = ["logo.png", ...readdirSync(mediaRoot).filter((name) => /^ssstik\.io_.*\.(jpg|mp4)$/i.test(name))];
+const rootFiles = ["logo.png", "logo-icon.jpg", ...readdirSync(mediaRoot).filter((name) => /^ssstik\.io_.*\.(jpg|mp4)$/i.test(name))];
 const heroFiles = readdirSync(join(mediaRoot, "hero")).filter((name) => /\.(jpg|jpeg|png|webp)$/i.test(name)).map((name) => `hero/${name}`);
 
 function contentType(filename) {

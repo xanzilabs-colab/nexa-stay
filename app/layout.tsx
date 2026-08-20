@@ -11,6 +11,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: { default: "NexaStay | Short-term stays across South Africa", template: "%s | NexaStay" },
   description: "Discover thoughtfully selected short-term rentals across South Africa.",
+  icons: { icon: "/media/logo-icon.jpg", apple: "/media/logo-icon.jpg" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
