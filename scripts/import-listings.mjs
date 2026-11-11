@@ -34,8 +34,12 @@ async function ensureBucket() {
 async function getImportAgent() {
   const { data: existing, error } = await supabase.from("agents").select("id").eq("email", "bookings@nexastay.co.za").maybeSingle();
   if (error) throw error;
-  if (existing) return existing.id;
-  const { data, error: insertError } = await supabase.from("agents").insert({ name: "NexaStay Bookings", slug: "nexastay-bookings", position: "Bookings Team", bio: "NexaStay guest enquiry team.", phone: "+27730884239", whatsapp: "27730884239", email: "bookings@nexastay.co.za", active: true }).select("id").single();
+  if (existing) {
+    const { error: updateError } = await supabase.from("agents").update({ active: false }).eq("id", existing.id);
+    if (updateError) throw updateError;
+    return existing.id;
+  }
+  const { data, error: insertError } = await supabase.from("agents").insert({ name: "NexaStay Bookings", slug: "nexastay-bookings", position: "Bookings Team", bio: "NexaStay guest enquiry team.", phone: "+27730884239", whatsapp: "27730884239", email: "bookings@nexastay.co.za", active: false }).select("id").single();
   if (insertError) throw insertError;
   return data.id;
 }
@@ -61,10 +65,13 @@ async function uploadImages(propertyId, listing, source) {
 }
 
 async function importSource(source, agentId) {
-  const listings = (source.jsonFiles ?? [source.jsonFile ?? "listings.json"])
+  const sourceListings = (source.jsonFiles ?? [source.jsonFile ?? "listings.json"])
     .flatMap((jsonFile) => JSON.parse(readFileSync(join(root, "public", "media", source.folder, jsonFile), "utf8")).listings ?? [])
     .filter((listing) => !source.listingIds || source.listingIds.includes(listing.listing_id))
     .concat(source.syntheticListings ?? []);
+  const listingsById = new Map();
+  for (const listing of sourceListings) listingsById.set(listing.listing_id, listing);
+  const listings = [...listingsById.values()];
   let imageCount = 0;
   for (const listing of listings) {
     const slug = `${source.developmentSlug}-${slugify(listing.title)}-${listing.listing_id.toLowerCase()}`;
