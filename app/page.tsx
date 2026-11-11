@@ -19,12 +19,12 @@ const developments = [
 
 const moments = [
   { path: "ssstik.io_1787129766769.jpg", className: "moment-feature", alt: "A NexaStay apartment interior" },
-  { path: "ssstik.io_1787129770476.jpg", className: "moment-tall", alt: "A bright apartment living space" },
-  { path: "ssstik.io_1787129773983.jpg", className: "moment-small", alt: "A considered detail from a NexaStay stay" },
-  { path: "ssstik.io_1787129777366.jpg", className: "moment-small", alt: "A welcoming apartment space" },
+  { path: "ssstik.io_1787129770476.jpg", className: "moment-top-middle", alt: "A bright apartment living space" },
+  { path: "ssstik.io_1787129773983.jpg", className: "moment-top-right", alt: "A considered detail from a NexaStay stay" },
+  { path: "ssstik.io_1787129777366.jpg", className: "moment-middle-left", alt: "A welcoming apartment space" },
   { path: "ssstik.io_1787129780726.jpg", className: "moment-quote", alt: "A NexaStay residence" },
-  { path: "ssstik.io_1787129784653.jpg", className: "moment-small", alt: "Comfortable spaces for your stay" },
-  { path: "ssstik.io_1787129788033.jpg", className: "moment-small", alt: "Thoughtful accommodation in Gauteng" },
+  { path: "ssstik.io_1787129784653.jpg", className: "moment-bottom-middle", alt: "Comfortable spaces for your stay" },
+  { path: "ssstik.io_1787129788033.jpg", className: "moment-bottom-right", alt: "Thoughtful accommodation in Gauteng" },
 ];
 
 const reasons = [
@@ -172,7 +172,12 @@ export default async function Home() {
         </div>
         <div className="moments-grid">
           {moments.map((moment, index) => <figure className={moment.className} key={moment.path}>
-            <Image src={siteAsset(moment.path)} alt={moment.alt} fill sizes="(max-width: 700px) 76vw, 40vw" />
+            <Image
+              src={siteAsset(moment.path)}
+              alt={moment.alt}
+              fill
+              sizes={moment.className === "moment-feature" ? "(max-width: 700px) 76vw, 42vw" : moment.className === "moment-quote" ? "(max-width: 700px) 58vw, 34vw" : "(max-width: 700px) 66vw, 30vw"}
+            />
             {index === 4 && <figcaption>Stay a little<br /><em>longer.</em></figcaption>}
           </figure>)}
         </div>
@@ -206,7 +211,10 @@ export default async function Home() {
     <section className="design-section section-soft faq-section">
       <div className="site-container faq-layout">
         <div><span className="eyebrow">HERE TO HELP</span><h2>Frequently asked questions</h2><p>Still unsure? Our local team is just a message away.</p><a className="button button-outline" href={`https://wa.me/${(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "27730884239").replace(/\D/g, "")}`} target="_blank" rel="noreferrer"><MessageCircle size={17} />Ask on WhatsApp</a></div>
-        <div className="faq-list">{questions.map(([question, answer]) => <details key={question}><summary>{question}<ChevronDown size={18} /></summary><p>{answer}</p></details>)}</div>
+        <div className="faq-list">{questions.map(([question, answer]) => <details key={question}>
+          <summary>{question}<ChevronDown size={18} /></summary>
+          <div className="faq-answer"><div><p>{answer}</p></div></div>
+        </details>)}</div>
       </div>
     </section>
 
