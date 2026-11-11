@@ -3,9 +3,9 @@ import type { Agent, Property } from "@/types/property";
 export const agents: Agent[] = [
   ["sarah-mokoena", "Naledi Mokoena", "Rental Specialist", "Helping guests find easy, comfortable stays across Waterfall City."],
   ["thabo-ndlovu", "Sibusiso Dlamini", "Guest Experience Lead", "Local advice and thoughtful support from enquiry to arrival."],
-  ["zola-williams", "Daniel Williams", "Coastal Stays Consultant", "Clear, practical help for every NexaStay guest."],
-  ["lerato-khumalo", "Thabang Khumalo", "Property Advisor", "Pairing guests with the right apartment and a seamless stay."],
-  ["matthew-naidoo", "Catherine De Beers", "Stay Coordinator", "Making every booking and arrival feel simple and well looked after."],
+  ["zola-williams", "Mark Williams", "Coastal Stays Consultant", "Clear, practical help for every NexaStay guest."],
+  ["lerato-khumalo", "Baldwin Khumalo", "Property Advisor", "Pairing guests with the right apartment and a seamless stay."],
+  ["matthew-naidoo", "Catherine Van der Merwe", "Stay Coordinator", "Making every booking and arrival feel simple and well looked after."],
 ].map(([slug, name, position, bio], index) => ({
   id: `agent-${index + 1}`, slug, name, position, bio, active: true,
   phone: `+27 12 555 01${index + 1}`, whatsapp: `2782555010${index + 1}`,

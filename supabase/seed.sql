@@ -2,9 +2,9 @@
 insert into public.agents (id,name,slug,position,bio,phone,whatsapp,email,image_url) values
 ('00000000-0000-0000-0000-000000000001','Sarah Mokoena','sarah-mokoena','Rental Specialist','Pretoria stays, handled with care.','+27125550101','27825550101','sarah@nexastay.co.za',''),
 ('00000000-0000-0000-0000-000000000002','Thabo Ndlovu','thabo-ndlovu','Guest Experience Lead','Practical local advice for Johannesburg.','+27125550102','27825550102','thabo@nexastay.co.za',''),
-('00000000-0000-0000-0000-000000000003','Zola Williams','zola-williams','Coastal Stays Consultant','Thoughtful Cape Town stays.','+27125550103','27825550103','zola@nexastay.co.za',''),
-('00000000-0000-0000-0000-000000000004','Lerato Khumalo','lerato-khumalo','Property Advisor','Helping guests find their right fit.','+27125550104','27825550104','lerato@nexastay.co.za',''),
-('00000000-0000-0000-0000-000000000005','Matthew Naidoo','matthew-naidoo','Stay Coordinator','Smooth Durban arrivals from enquiry to check-in.','+27125550105','27825550105','matthew@nexastay.co.za','') on conflict (id) do nothing;
+('00000000-0000-0000-0000-000000000003','Mark Williams','zola-williams','Coastal Stays Consultant','Thoughtful Cape Town stays.','+27125550103','27825550103','zola@nexastay.co.za',''),
+('00000000-0000-0000-0000-000000000004','Baldwin Khumalo','lerato-khumalo','Property Advisor','Helping guests find their right fit.','+27125550104','27825550104','lerato@nexastay.co.za',''),
+('00000000-0000-0000-0000-000000000005','Catherine Van der Merwe','matthew-naidoo','Stay Coordinator','Smooth Durban arrivals from enquiry to check-in.','+27125550105','27825550105','matthew@nexastay.co.za','') on conflict (id) do nothing;
 insert into public.properties (title,slug,description,property_type,status,price_per_night,minimum_nights,bedrooms,bathrooms,max_guests,province,city,suburb,address,featured,available,amenities,agent_id) values
 ('Modern 2 Bedroom Apartment','modern-2-bedroom-apartment-hatfield','Sample content: a bright city apartment close to everything.','Apartment','published',1250,2,2,2,4,'Gauteng','Pretoria','Hatfield','Hatfield, Pretoria',true,true,'{WiFi,Parking,Kitchen,Workspace,TV}','00000000-0000-0000-0000-000000000001'),
 ('Sunlit Menlyn Executive Suite','sunlit-menlyn-executive-suite','Sample content: a calm, connected base in Menlyn.','Apartment','published',1650,2,1,1,2,'Gauteng','Pretoria','Menlyn','Menlyn, Pretoria',true,true,'{WiFi,Parking,Kitchen,TV}','00000000-0000-0000-0000-000000000001'),
