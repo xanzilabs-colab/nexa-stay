@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Bath, BedDouble, Check, MapPin, MessageCircle, Users } from "lucide-react";
 import { getProperty } from "@/lib/data";
+import { BookingForm } from "@/components/booking-form";
 import { PropertyGallery } from "@/components/property-gallery";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -23,6 +24,7 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
   const price = property.price_period === "price_on_request"
     ? "Price on request"
     : <>R{property.price_per_night.toLocaleString()} <small>{period}</small></>;
+  const mapQuery = encodeURIComponent(`${property.suburb}, ${property.city}, ${property.province}`);
 
   return <main className="property-page">
     <div className="breadcrumbs"><Link href="/">Home</Link><span>›</span><Link href="/properties">Stays</Link><span>›</span><span>{property.title}</span></div>
@@ -37,12 +39,21 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
           <span><Bath />{property.bathrooms} bathrooms</span>
           <span><Users />{property.max_guests} guests</span>
         </div>
-        <hr />
         <h2>About this property</h2>
         <p className="description">{property.description}</p>
+        <h2>At a glance</h2>
+        <ul className="property-facts">
+          <li><span>Development</span><strong>{property.development_name}</strong></li>
+          <li><span>Property type</span><strong>{property.property_type}</strong></li>
+          <li><span>Bedrooms</span><strong>{property.bedrooms}</strong></li>
+          <li><span>Bathrooms</span><strong>{property.bathrooms}</strong></li>
+          <li><span>Guests</span><strong>Up to {property.max_guests}</strong></li>
+          <li><span>Minimum stay</span><strong>{property.minimum_nights} nights</strong></li>
+        </ul>
         <h2>Amenities</h2>
         <div className="amenities">{property.amenities.map((item) => <span key={item}><Check size={16} />{item}</span>)}</div>
-        <hr />
+        <h2>Location</h2>
+        <div className="property-map"><iframe title={`Map of ${property.suburb}, ${property.city}`} src={`https://maps.google.com/maps?q=${mapQuery}&output=embed`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" /></div>
         <div className="host">
           {property.agent.image_url
             ? <Image src={property.agent.image_url} alt={property.agent.name} width={76} height={76} />
@@ -52,8 +63,8 @@ export default async function PropertyPage({ params }: { params: Promise<{ slug:
       </article>
       <aside className="booking-card">
         <p className="eyebrow">INTERESTED IN STAYING?</p><h2>Make an enquiry</h2>
-        <p>Tell us your dates and the right agent will be in touch.</p>
-        <Link href={`/booking/${property.id}`} className="button button-teal">Request to book</Link>
+        <p>Share your dates with us and the local agent will be in touch.</p>
+        <BookingForm propertyId={property.id} propertyName={property.title} />
         <a className="button whatsapp" href={`https://wa.me/${whatsapp}?text=${message}`} target="_blank" rel="noreferrer"><MessageCircle size={17} />WhatsApp agent</a>
         <small>Minimum {property.minimum_nights} nights</small>
       </aside>

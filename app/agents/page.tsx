@@ -1,2 +1,17 @@
-import Image from "next/image"; import Link from "next/link"; import { getAgents } from "@/lib/data";
-export default async function AgentsPage(){const agents=await getAgents();return <main className="agents-page"><p className="eyebrow">THE PEOPLE BEHIND YOUR STAY</p><h1>Local people, helpful advice.</h1><p className="lead">Our team knows these places and is ready to help you find the right fit.</p><div className="agent-grid">{agents.map(agent=><article className="agent-card" key={agent.id}>{agent.image_url ? <Image src={agent.image_url} alt={agent.name} width={400} height={480}/> : <div className="agent-image-pending">{agent.name.split(" ").map((part: string) => part[0]).join("")}</div>}<div><p className="eyebrow">{agent.position}</p><h2>{agent.name}</h2><p>{agent.bio}</p><Link href={`/agents/${agent.slug}`}>View profile</Link></div></article>)}</div></main>}
+import Link from "next/link";
+import { AgentGrid } from "@/components/agent-grid";
+import { OwnerPanel } from "@/components/owner-panel";
+import { getAgents } from "@/lib/data";
+
+export default async function AgentsPage() {
+  const agents = await getAgents();
+  return <main className="reference-page">
+    <section className="page-intro"><div className="site-container">
+      <div className="breadcrumbs"><Link href="/">Home</Link><span>›</span><span>Agents</span></div>
+      <h1>Local people, helpful advice</h1>
+      <p>Our team knows these places and is ready to help you find the right fit.</p>
+    </div></section>
+    <section className="design-section"><div className="site-container"><AgentGrid agents={agents} /></div></section>
+    <section className="design-section section-soft"><OwnerPanel /></section>
+  </main>;
+}
