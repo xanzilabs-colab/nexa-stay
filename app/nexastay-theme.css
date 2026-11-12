@@ -837,3 +837,306 @@
     margin-top: 14px;
   }
 }
+
+body.nexastay-theme:has(.admin-app-shell) {
+  min-height: 100%;
+  padding-bottom: 0;
+  background: #f2f4f6;
+}
+
+body.nexastay-theme:has(.admin-app-shell) > .site-header,
+body.nexastay-theme:has(.admin-app-shell) > .utility-bar,
+body.nexastay-theme:has(.admin-app-shell) > .mobile-tabbar,
+body.nexastay-theme:has(.admin-app-shell) > .newsletter,
+body.nexastay-theme:has(.admin-app-shell) > .site-footer { display: none; }
+
+.admin-app-shell {
+  --admin-line: #dce3e9;
+  --admin-ink: #0c1b2e;
+  --admin-muted: #637183;
+  --admin-navy: #0b2540;
+  --admin-teal: #0f7c86;
+  min-height: 100dvh;
+  background: #f2f4f6;
+  color: var(--admin-ink);
+}
+
+.admin-topbar {
+  position: sticky;
+  z-index: 40;
+  top: 0;
+  border-bottom: 1px solid var(--admin-line);
+  background: rgb(255 255 255 / 96%);
+  backdrop-filter: blur(12px);
+}
+
+.admin-topbar-inner {
+  display: flex;
+  width: min(1240px, calc(100% - 48px));
+  min-height: 72px;
+  align-items: center;
+  gap: 34px;
+  margin-inline: auto;
+}
+
+.admin-topbar-primary,
+.admin-brand,
+.admin-topbar-nav,
+.admin-topbar-primary form { display: flex; align-items: center; }
+.admin-topbar-primary { gap: 24px; }
+.admin-topbar-primary form { margin: 0; }
+.admin-brand { gap: 10px; color: var(--admin-navy); font-size: 20px; font-weight: 800; letter-spacing: -.7px; }
+.admin-brand > span:last-child { display: inline-flex; align-items: center; gap: 9px; }
+.admin-brand b { color: var(--admin-teal); font-weight: 600; }
+.admin-brand small { border-left: 1px solid var(--admin-line); padding-left: 9px; color: var(--admin-muted); font-size: 9px; font-weight: 800; letter-spacing: 1.1px; }
+.admin-brand-mark { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 12px; background: var(--admin-navy); color: #fff; font-size: 20px; }
+.admin-topbar-nav { align-self: stretch; gap: 8px; margin-left: auto; }
+.admin-topbar-nav a { display: flex; align-items: center; border-bottom: 2px solid transparent; padding: 2px 12px 0; color: #435267; font-size: 13px; font-weight: 700; }
+.admin-topbar-nav a:hover { border-bottom-color: var(--admin-teal); color: var(--admin-teal); }
+.admin-topbar-logout,
+.admin-topbar-back {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--admin-line);
+  border-radius: 9px;
+  padding: 8px 13px;
+  background: #fff;
+  color: var(--admin-navy);
+  font-size: 12px;
+  font-weight: 700;
+}
+.admin-topbar-back { margin-left: auto; }
+.admin-topbar-logout:hover,
+.admin-topbar-back:hover { border-color: #b8c5d0; background: #f7f9fa; }
+
+.admin-app-shell .admin {
+  width: min(1240px, calc(100% - 48px));
+  max-width: 1240px;
+  margin-inline: auto;
+  padding: 38px 0 64px;
+  background: transparent;
+}
+.admin-app-shell .admin .eyebrow { color: var(--admin-teal); }
+.admin-app-shell .admin h1,
+.admin-app-shell .admin h2,
+.admin-app-shell .admin h3 { color: var(--admin-navy); }
+.admin-app-shell .admin-head { margin-bottom: 25px; }
+.admin-app-shell .admin-head h1 { margin: 0; font-size: clamp(30px, 4vw, 40px); }
+.admin-app-shell .stat-grid article,
+.admin-app-shell .admin-bookings,
+.admin-app-shell .detail-grid > section,
+.admin-app-shell .detail-grid > aside,
+.admin-app-shell .whatsapp-settings {
+  border: 1px solid var(--admin-line);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 5px 18px rgb(11 37 64 / 4%);
+}
+.admin-app-shell .stat-grid article { padding: 21px; }
+.admin-app-shell .stat-grid article p { color: var(--admin-muted); }
+.admin-app-shell .stat-grid strong { color: var(--admin-navy); }
+.admin-app-shell .admin-bookings { padding: 23px; }
+.admin-app-shell .section-heading { margin-bottom: 17px; }
+.admin-app-shell .booking-table { overflow: hidden; border: 1px solid var(--admin-line); border-radius: 12px; }
+.admin-app-shell .booking-table-head,
+.admin-app-shell .booking-table-row { grid-template-columns: minmax(140px, 1.1fr) minmax(150px, 1.3fr) minmax(150px, 1.15fr) minmax(95px, .75fr) minmax(90px, .7fr); }
+.admin-app-shell .booking-table-head { background: #f5f8fa; color: var(--admin-muted); font-size: 10px; font-weight: 800; letter-spacing: .7px; text-transform: uppercase; }
+.admin-app-shell .booking-table-head > span,
+.admin-app-shell .booking-table-row > span,
+.admin-app-shell .booking-table-row > a { min-width: 0; padding: 13px 10px; overflow-wrap: anywhere; }
+.admin-app-shell .booking-table-row { align-items: center; border-top: 1px solid var(--admin-line); font-size: 12px; }
+.admin-app-shell .booking-table-row > span:first-child { display: grid; }
+.admin-app-shell .booking-table-row small { display: block; margin-top: 4px; color: var(--admin-muted); font-size: 10px; }
+.admin-app-shell .booking-table-row > a { color: var(--admin-teal); font-weight: 800; }
+.admin-app-shell .booking-table-row > a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.admin-app-shell .admin-empty { border: 1px dashed #cbd6df; border-radius: 13px; background: #f8fafb; }
+.admin-app-shell .status { display: inline-flex; width: max-content; max-width: 100%; align-items: center; border-radius: 99px; padding: 6px 10px; font-size: 10px; font-weight: 800; overflow-wrap: anywhere; }
+
+.admin-back-link { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 24px; color: var(--admin-teal); font-size: 13px; font-weight: 800; }
+.admin-back-link:hover { color: var(--admin-navy); }
+.admin-app-shell .detail-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 0 0 24px; }
+.admin-app-shell .detail-heading h1 { margin: 0; font-size: clamp(28px, 4vw, 38px); overflow-wrap: anywhere; }
+.admin-app-shell .detail-heading > div > p:last-child { margin: 8px 0 0; color: var(--admin-muted); font-size: 13px; }
+.admin-app-shell .detail-grid { grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr); gap: 18px; align-items: start; }
+.admin-app-shell .detail-grid > section,
+.admin-app-shell .detail-grid > aside { min-width: 0; padding: 23px; }
+.admin-app-shell .detail-grid h2 { margin: 0 0 13px; font-size: 20px; }
+.admin-app-shell .detail-grid dl { display: grid; grid-template-columns: minmax(110px, .4fr) minmax(0, 1fr); gap: 10px 15px; margin: 0 0 25px; }
+.admin-app-shell .detail-grid dt { color: var(--admin-muted); font-size: 12px; font-weight: 700; }
+.admin-app-shell .detail-grid dd { min-width: 0; margin: 0; color: var(--admin-ink); font-size: 13px; overflow-wrap: anywhere; }
+.admin-app-shell .detail-grid dd a,
+.admin-app-shell .admin-agent-email { color: var(--admin-teal); font-weight: 700; overflow-wrap: anywhere; }
+.admin-app-shell .detail-grid aside > p:not(.eyebrow) { color: var(--admin-muted); font-size: 13px; overflow-wrap: anywhere; }
+.admin-app-shell .admin-price { margin-block: 14px; color: var(--admin-navy) !important; font-size: 22px !important; font-weight: 800; }
+.admin-app-shell .admin-price small { color: var(--admin-muted); font-size: 12px; font-weight: 600; }
+.admin-app-shell .admin-images { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-block: 18px; }
+.admin-app-shell .admin-images img { width: 100%; height: 96px; border-radius: 10px; object-fit: cover; }
+.admin-app-shell .detail-grid hr { height: 1px; margin: 20px 0; border: 0; background: var(--admin-line); }
+.admin-app-shell .detail-grid aside h3 { margin: 0 0 6px; font-size: 16px; }
+.admin-app-shell .status-control { display: grid; gap: 10px; margin-top: 20px; border-top: 1px solid var(--admin-line); padding-top: 19px; }
+.admin-app-shell .status-control > label { color: var(--admin-navy); font-size: 12px; font-weight: 800; }
+.admin-app-shell .status-control .button,
+.admin-app-shell .message-composer .button,
+.admin-app-shell .whatsapp-settings > .button { width: 100%; min-height: 46px; justify-content: center; border: 0; border-radius: 10px; font-weight: 800; }
+.admin-app-shell .message-composer { margin-top: 25px; border-top-color: var(--admin-line); }
+.admin-app-shell .message-composer h3 { margin: 4px 0 12px; }
+.admin-app-shell .message-composer textarea { width: 100%; border: 1px solid var(--admin-line); border-radius: 11px; padding: 13px; background: #fbfcfd; color: var(--admin-ink); font: inherit; resize: vertical; }
+.admin-app-shell .message-composer textarea:focus,
+.admin-app-shell .whatsapp-settings input:focus,
+.admin-app-shell .whatsapp-settings select:focus,
+.admin-app-shell .status-control select:focus { outline: 2px solid rgb(15 124 134 / 28%); outline-offset: 1px; border-color: var(--admin-teal); }
+.admin-app-shell .status-control .custom-select { margin-top: 0; }
+.admin-app-shell .status-control .custom-select-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 46px;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--admin-line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #fbfcfd;
+  color: var(--admin-ink);
+  text-align: left;
+}
+.admin-app-shell .status-control .custom-select-menu { overflow: hidden; border: 1px solid var(--admin-line); border-radius: 11px; background: #fff; box-shadow: 0 15px 40px rgb(11 37 64 / 16%); }
+.admin-app-shell .status-control .custom-select-menu button { width: 100%; border: 0; background: #fff; color: var(--admin-ink); text-align: left; }
+.admin-app-shell .status-control .custom-select-menu button:hover,
+.admin-app-shell .status-control .custom-select-menu button.selected { background: #e8f3f4; color: var(--admin-teal); }
+.admin-app-shell .message-composer > small { display: block; margin-top: 12px; color: var(--admin-muted); line-height: 1.5; }
+
+.admin-settings-page { max-width: 900px !important; }
+.admin-settings-page .whatsapp-settings { display: grid; gap: 15px; padding: clamp(20px, 4vw, 36px); }
+.admin-settings-page .whatsapp-settings h1 { margin: 0; font-size: clamp(27px, 4vw, 36px); }
+.admin-settings-page .whatsapp-settings > p:not(.eyebrow) { margin: 0; color: var(--admin-muted); line-height: 1.65; }
+.admin-settings-page .whatsapp-settings label { display: grid; gap: 7px; margin: 0; color: var(--admin-navy); font-size: 12px; font-weight: 800; }
+.admin-settings-page .whatsapp-settings label small { color: var(--admin-muted); font-size: 11px; font-weight: 500; }
+.admin-settings-page .whatsapp-settings input,
+.admin-settings-page .whatsapp-settings select { width: 100%; min-width: 0; min-height: 46px; border: 1px solid var(--admin-line); border-radius: 10px; padding: 10px 12px; background: #fbfcfd; color: var(--admin-ink); font-size: 14px; }
+.admin-settings-page .whatsapp-settings .zernio-link { width: fit-content; min-height: 42px; border-radius: 10px; }
+.admin-settings-page .whatsapp-settings .whatsapp-note { border-radius: 11px; padding: 13px 15px; background: #f3f7f8; font-size: 12px; }
+
+.admin-login {
+  display: grid;
+  min-height: calc(100dvh - 72px);
+  place-items: center;
+  padding: 38px 24px;
+  background:
+    radial-gradient(ellipse at 2% 12%, rgb(15 124 134 / 7%), transparent 34%),
+    #f2f4f6;
+}
+.admin-login-panel {
+  display: grid;
+  width: min(1040px, 100%);
+  min-height: 570px;
+  grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+  overflow: hidden;
+  border: 1px solid var(--admin-line);
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgb(11 37 64 / 10%);
+}
+.admin-login-art {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(30px, 5vw, 54px);
+  background:
+    radial-gradient(circle at 92% 9%, rgb(110 205 203 / 24%), transparent 26%),
+    linear-gradient(145deg, #12395b, #08192c 82%);
+  color: #fff;
+}
+.admin-login-art-icon { display: grid; width: 50px; height: 50px; place-items: center; margin-bottom: 42px; border: 1px solid rgb(255 255 255 / 19%); border-radius: 15px; background: rgb(255 255 255 / 9%); color: #a7e4e3; }
+.admin-login-art-icon svg { width: 25px; height: 25px; }
+.admin-login-art .eyebrow { color: #a7e4e3; }
+.admin-login-art h1 { max-width: 12ch; margin: 0 0 15px; color: #fff; font-size: clamp(31px, 4vw, 45px); letter-spacing: -.04em; line-height: 1.1; }
+.admin-login-art > p:not(.eyebrow) { max-width: 39ch; margin: 0; color: rgb(255 255 255 / 74%); font-size: 14px; line-height: 1.7; }
+.admin-login-art ul { display: grid; gap: 13px; margin: 28px 0 30px; padding: 0; list-style: none; color: rgb(255 255 255 / 90%); font-size: 12px; }
+.admin-login-art li { display: flex; align-items: center; gap: 9px; }
+.admin-login-art li svg { width: 17px; height: 17px; flex: none; color: #8cdbd8; }
+.admin-login-home { display: inline-flex; align-items: center; gap: 8px; margin-top: auto; color: rgb(255 255 255 / 77%); font-size: 12px; font-weight: 700; }
+.admin-login-home:hover { color: #fff; }
+.admin-login-home svg { width: 16px; height: 16px; }
+.admin-login-content { display: grid; place-items: center; padding: clamp(28px, 6vw, 65px); }
+.admin-login-form { display: grid; width: min(380px, 100%); gap: 17px; }
+.admin-login-form .eyebrow { margin: 0; }
+.admin-login-form h2 { margin: 0; color: var(--admin-navy); font-size: 32px; letter-spacing: -.04em; }
+.admin-login-description { margin: -10px 0 5px; color: var(--admin-muted); font-size: 13px; }
+.admin-login-form label { display: grid; gap: 8px; color: var(--admin-navy); font-size: 12px; font-weight: 800; }
+.admin-login-form input { width: 100%; min-height: 48px; border: 1px solid var(--admin-line); border-radius: 10px; padding: 11px 13px; background: #fbfcfd; color: var(--admin-ink); font: inherit; font-size: 14px; }
+.admin-login-form input:focus { border-color: var(--admin-teal); outline: 2px solid rgb(15 124 134 / 23%); outline-offset: 1px; }
+.admin-login-form > .button { min-height: 49px; justify-content: center; gap: 8px; border: 0; border-radius: 10px; background: var(--admin-navy); color: #fff; font-weight: 800; }
+.admin-login-form > .button:hover { background: #123b5e; }
+.admin-login-form .form-error { margin: 0; border: 1px solid #f1c6c2; border-radius: 10px; padding: 11px 12px; background: #fff4f3; color: #9c2e28; font-size: 12px; }
+.admin-login-secure { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 0; color: var(--admin-muted); font-size: 11px; }
+.admin-login-secure svg { width: 15px; height: 15px; color: var(--admin-teal); }
+.admin-app-shell .admin-error { min-height: calc(100dvh - 72px); }
+
+@media (max-width: 800px) {
+  .admin-topbar-inner {
+    display: block;
+    width: 100%;
+    min-height: 0;
+    padding: 0 16px;
+  }
+  .admin-topbar-primary { min-height: 62px; justify-content: space-between; gap: 10px; }
+  .admin-brand { font-size: 18px; }
+  .admin-brand-mark { width: 35px; height: 35px; border-radius: 11px; }
+  .admin-topbar-nav { gap: 5px; overflow-x: auto; margin: 0 -16px; border-top: 1px solid var(--admin-line); padding: 0 16px; scrollbar-width: none; }
+  .admin-topbar-nav::-webkit-scrollbar { display: none; }
+  .admin-topbar-nav a { min-height: 43px; flex: none; padding-inline: 12px; font-size: 12px; }
+  .admin-app-shell .admin {
+    width: 100%;
+    padding: 25px 16px calc(38px + env(safe-area-inset-bottom));
+  }
+  .admin-app-shell .admin-head { margin-bottom: 20px; }
+  .admin-app-shell .admin-head h1 { font-size: 30px; }
+  .admin-app-shell .stat-grid article { border-radius: 14px; padding: 15px; }
+  .admin-app-shell .admin-bookings { border-radius: 16px; padding: 17px 12px; }
+  .admin-app-shell .booking-table { overflow: visible; border: 0; border-radius: 0; }
+  .admin-app-shell .booking-table-row { border: 1px solid var(--admin-line); border-radius: 13px; }
+  .admin-app-shell .booking-table-row > span,
+  .admin-app-shell .booking-table-row > a { padding: 0; }
+  .admin-app-shell .booking-table-row > a { display: flex; min-height: 43px; align-items: center; justify-content: center; border-radius: 9px; background: var(--admin-teal); color: #fff; }
+  .admin-app-shell .detail-heading { align-items: flex-start; }
+  .admin-app-shell .detail-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .admin-app-shell .detail-grid > section,
+  .admin-app-shell .detail-grid > aside { border-radius: 15px; padding: 18px; }
+  .admin-app-shell .detail-grid dl { grid-template-columns: minmax(90px, .42fr) minmax(0, 1fr); gap: 11px; }
+  .admin-app-shell .admin-images img { height: clamp(82px, 23vw, 130px); }
+  .admin-app-shell .status-control .button,
+  .admin-app-shell .message-composer .button,
+  .admin-app-shell .whatsapp-settings > .button { min-height: 48px; }
+  .admin-settings-page { padding-top: 22px !important; }
+  .admin-settings-page .whatsapp-settings { border-radius: 16px; padding: 20px 17px; }
+  .admin-settings-page .whatsapp-settings .zernio-link { width: 100%; justify-content: center; }
+  .admin-settings-page .whatsapp-settings input,
+  .admin-settings-page .whatsapp-settings select { min-height: 48px; }
+  .admin-login { min-height: calc(100dvh - 105px); padding: 20px 16px 30px; }
+  .admin-login-panel { width: min(520px, 100%); min-height: 0; grid-template-columns: 1fr; border-radius: 20px; }
+  .admin-login-art { padding: 23px 22px; }
+  .admin-login-art-icon { width: 42px; height: 42px; margin-bottom: 17px; border-radius: 13px; }
+  .admin-login-art h1 { max-width: 19ch; margin-bottom: 8px; font-size: 25px; }
+  .admin-login-art > p:not(.eyebrow) { font-size: 12px; }
+  .admin-login-art ul { grid-template-columns: 1fr; gap: 8px; margin: 16px 0 0; font-size: 11px; }
+  .admin-login-art li svg { width: 15px; height: 15px; }
+  .admin-login-home { display: none; }
+  .admin-login-content { padding: 24px 22px 26px; }
+  .admin-login-form { gap: 14px; }
+  .admin-login-form h2 { font-size: 27px; }
+  .admin-login-form input { min-height: 49px; }
+  .admin-login-form > .button { min-height: 49px; }
+  .admin-app-shell .admin-error { min-height: calc(100dvh - 105px); }
+}
+
+@media (max-width: 420px) {
+  .admin-app-shell .detail-heading { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 9px; }
+  .admin-app-shell .detail-heading h1 { font-size: 26px; }
+  .admin-app-shell .detail-heading > .status { justify-self: end; }
+  .admin-login { padding-inline: 12px; }
+  .admin-login-panel { border-radius: 17px; }
+  .admin-login-art { padding: 19px 18px; }
+  .admin-login-content { padding-inline: 18px; }
+}

@@ -43,12 +43,6 @@ export default async function AdminPage() {
           <p className="eyebrow">ADMIN OVERVIEW</p>
           <h1>Enquiries &amp; stays</h1>
         </div>
-        <div className="admin-actions">
-          <Link href="/admin/settings/whatsapp">WhatsApp settings</Link>
-          <form action="/api/admin/logout" method="post">
-            <button className="admin-logout">Sign out</button>
-          </form>
-        </div>
       </div>
       <div className="stat-grid">
         {stats.map(({ label, value }) => (
