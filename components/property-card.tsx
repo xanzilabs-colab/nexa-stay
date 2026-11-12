@@ -4,7 +4,7 @@ import { Bath, BedDouble, Camera, MapPin, Users } from "lucide-react";
 import type { Property } from "@/types/property";
 import { SaveStayButton } from "@/components/save-stay-button";
 
-export function PropertyCard({ property, showGuestsOnImage = false }: { property: Property; showGuestsOnImage?: boolean }) {
+export function PropertyCard({ property, compactGuestCount = false }: { property: Property; compactGuestCount?: boolean }) {
   const image = property.images.find((item) => item.is_primary) ?? property.images[0];
   const price = property.price_period === "price_on_request"
     ? "Price on request"
@@ -15,7 +15,6 @@ export function PropertyCard({ property, showGuestsOnImage = false }: { property
       {image ? <Image src={image.public_url} alt={image.alt_text || property.title} fill sizes="(max-width: 700px) 86vw, (max-width: 1100px) 45vw, 380px" /> : <span>Listing images coming soon</span>}
       {property.featured && <span className="stay-badge">Featured</span>}
       <span className="stay-image-count"><Camera size={14} />{property.images.length || 0}</span>
-      {showGuestsOnImage && <span className="stay-image-guests"><Users size={14} />{property.max_guests} guests</span>}
       <span className="stay-image-price">{price}</span>
     </Link>
     <SaveStayButton propertyId={property.id} label={property.title} />
@@ -25,7 +24,7 @@ export function PropertyCard({ property, showGuestsOnImage = false }: { property
       <ul className="stay-specs">
         <li><BedDouble size={16} />{property.bedrooms} bed</li>
         <li><Bath size={16} />{property.bathrooms} bath</li>
-        {!showGuestsOnImage && <li><Users size={16} />{property.max_guests} guests</li>}
+        <li aria-label={`${property.max_guests} guests`}><Users size={16} />{compactGuestCount ? property.max_guests : `${property.max_guests} guests`}</li>
       </ul>
       <div className="stay-card-actions">
         <Link className="button button-outline" href={`/properties/${property.slug}`}>View stay</Link>

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ArrowUpDown, Search, SlidersHorizontal } from "lucide-react";
 import { PropertyCard } from "@/components/property-card";
+import { getSavedStayIds, SAVED_STAYS_CHANGE_EVENT } from "@/lib/saved-stays";
 import type { Property } from "@/types/property";
 
 const developments = [
@@ -25,20 +26,13 @@ export function StayCatalog({ properties, initialFilters }: { properties: Proper
   const [savedIds, setSavedIds] = useState<string[]>([]);
 
   useEffect(() => {
-    const updateSavedIds = () => {
-      try {
-        const value: unknown = JSON.parse(localStorage.getItem("nx-saved") ?? "[]");
-        setSavedIds(Array.isArray(value) ? value.filter((id): id is string => typeof id === "string") : []);
-      } catch {
-        setSavedIds([]);
-      }
-    };
+    const updateSavedIds = () => setSavedIds(getSavedStayIds());
     updateSavedIds();
     window.addEventListener("storage", updateSavedIds);
-    window.addEventListener("saved-stays-change", updateSavedIds);
+    window.addEventListener(SAVED_STAYS_CHANGE_EVENT, updateSavedIds);
     return () => {
       window.removeEventListener("storage", updateSavedIds);
-      window.removeEventListener("saved-stays-change", updateSavedIds);
+      window.removeEventListener(SAVED_STAYS_CHANGE_EVENT, updateSavedIds);
     };
   }, []);
 
@@ -76,7 +70,7 @@ export function StayCatalog({ properties, initialFilters }: { properties: Proper
       {developments.map((item) => <button type="button" key={item.slug} className={development === item.slug ? "active" : ""} onClick={() => setDevelopment(item.slug)}>{item.name}</button>)}
     </div>
     <div className="catalog-results-heading"><strong>{visible.length} {visible.length === 1 ? "stay" : "stays"}{development !== "all" ? ` at ${developments.find((item) => item.slug === development)?.name}` : " available"}{dateSummary}</strong>{savedOnly && <span>Saved stays</span>}</div>
-    {visible.length ? <div className="catalog-grid">{visible.map((property) => <PropertyCard property={property} showGuestsOnImage key={property.id} />)}</div>
+    {visible.length ? <div className="catalog-grid">{visible.map((property) => <PropertyCard property={property} compactGuestCount key={property.id} />)}</div>
       : <div className="empty-results"><h2>{savedOnly ? "No saved stays yet" : "No stays match those filters"}</h2><p>{savedOnly ? "Tap the heart on any stay to save it here." : "Try widening your search or clearing one of the filters."}</p><button className="button button-outline" type="button" onClick={() => { setQuery(""); setDevelopment("all"); setGuests(""); setBedrooms(""); setMaxPrice(""); setSavedOnly(false); }}>Clear filters</button></div>}
   </div>;
 }

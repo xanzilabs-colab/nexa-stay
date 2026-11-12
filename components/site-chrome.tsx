@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { getSavedStayIds, SAVED_STAYS_CHANGE_EVENT } from "@/lib/saved-stays";
 import { Building2, Heart, Home, Info, MessageCircle, Phone, Search, UserRound } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
 import { siteAsset } from "@/lib/site-assets";
@@ -56,20 +57,13 @@ export function Header() {
   }, [pathname]);
 
   useEffect(() => {
-    const updateSavedCount = () => {
-      try {
-        const saved = JSON.parse(localStorage.getItem("nx-saved") ?? "[]");
-        setSavedCount(Array.isArray(saved) ? saved.length : 0);
-      } catch {
-        setSavedCount(0);
-      }
-    };
+    const updateSavedCount = () => setSavedCount(getSavedStayIds().length);
     updateSavedCount();
     window.addEventListener("storage", updateSavedCount);
-    window.addEventListener("saved-stays-change", updateSavedCount);
+    window.addEventListener(SAVED_STAYS_CHANGE_EVENT, updateSavedCount);
     return () => {
       window.removeEventListener("storage", updateSavedCount);
-      window.removeEventListener("saved-stays-change", updateSavedCount);
+      window.removeEventListener(SAVED_STAYS_CHANGE_EVENT, updateSavedCount);
     };
   }, []);
 
