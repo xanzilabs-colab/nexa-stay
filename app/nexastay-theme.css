@@ -325,6 +325,7 @@
 .nexastay-theme .agent-card p:not(.eyebrow) { color: var(--nx-muted); font-size: 12px; }
 .nexastay-theme .agent-card a { color: var(--nx-teal-dark); font-size: 12px; font-weight: 700; }
 .nexastay-theme .property-page { max-width: 1240px; margin: auto; padding: 26px 24px 60px; }
+.nexastay-theme .property-page .gallery-frame { position: relative; }
 .nexastay-theme .property-page .gallery { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 220px 220px; gap: 9px; overflow: hidden; border-radius: 12px; }
 .gallery-swipe-hint { display: none; }
 .gallery-pagination { display: none; }
@@ -653,15 +654,18 @@
   .nexastay-theme .agent-grid::-webkit-scrollbar { display: none; }
   .nexastay-theme .agent-card { width: 54vw; max-width: 215px; flex: none; scroll-snap-align: start; }
   .nexastay-theme .property-page { padding: 0 16px 42px; }
-  .nexastay-theme .property-page .gallery { position: relative; display: flex; overflow-x: auto; gap: 0; margin-inline: -16px; border-radius: 0; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .nexastay-theme .property-page .gallery-frame { margin-inline: -16px; }
+  .nexastay-theme .property-page .gallery { position: relative; display: flex; overflow-x: auto; gap: 0; border-radius: 0; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .nexastay-theme .property-page .gallery::-webkit-scrollbar { display: none; }
   .nexastay-theme .property-page .gallery button { width: 100%; height: 260px; flex: none; scroll-snap-align: center; }
   .nexastay-theme .property-page .gallery .gallery-main { grid-row: auto; }
   .nexastay-theme .property-page .gallery-swipe-hint { position: absolute; z-index: 1; top: 12px; right: 12px; display: inline-flex; align-items: center; gap: 5px; border-radius: 99px; padding: 8px 11px; background: rgb(8 25 44 / 82%); color: #fff; font-size: 11px; font-weight: 600; pointer-events: none; }
-  .nexastay-theme .property-page .gallery-pagination { position: absolute; z-index: 1; right: 0; bottom: 12px; left: 0; display: flex; width: fit-content; max-width: calc(100% - 24px); min-height: 28px; align-items: center; justify-content: center; gap: 6px; overflow-x: auto; margin: auto; border-radius: 99px; padding: 0 10px; background: rgb(8 25 44 / 72%); scrollbar-width: none; }
+  .nexastay-theme .property-page .gallery-pagination { position: absolute; z-index: 2; right: 0; bottom: 12px; left: 0; display: flex; width: fit-content; max-width: calc(100% - 24px); min-height: 28px; align-items: center; justify-content: center; gap: 6px; margin: 0 auto; border-radius: 99px; padding: 0 10px; background: rgb(8 25 44 / 72%); }
   .nexastay-theme .property-page .gallery-pagination::-webkit-scrollbar { display: none; }
-  .nexastay-theme .property-page .gallery-pagination button { width: 7px; height: 7px; min-height: 0; flex: none; border: 0; border-radius: 99px; padding: 0; background: rgb(255 255 255 / 62%); }
+  .nexastay-theme .property-page .gallery-pagination button { width: 7px; height: 7px; min-height: 0; flex: none; border: 0; border-radius: 99px; padding: 0; background: rgb(255 255 255 / 62%); cursor: pointer; transition: width .2s ease, height .2s ease, opacity .2s ease, background-color .2s ease, transform .2s ease; }
   .nexastay-theme .property-page .gallery-pagination button.active { width: 18px; background: #fff; }
+  .nexastay-theme .property-page .gallery-pagination button.edge { width: 4px; height: 4px; opacity: .58; }
+  .nexastay-theme .property-page .gallery-pagination button.edge.active { width: 14px; height: 7px; opacity: 1; }
   .nexastay-theme .property-layout { grid-template-columns: minmax(0, 1fr); gap: 18px; padding: 20px 0 24px; }
   .nexastay-theme .property-content h1 { font-size: 25px; }
   .nexastay-theme .property-content h2 { margin-top: 24px; font-size: 19px; }

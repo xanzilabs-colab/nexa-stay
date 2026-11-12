@@ -11,6 +11,10 @@ export function PropertyGallery({ images }: { images: PropertyImage[] }) {
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const activeIndex = active ?? 0;
+  const paginationStart = images.length > 7
+    ? Math.max(0, Math.min(galleryIndex - 3, images.length - 7))
+    : 0;
+  const paginationEnd = Math.min(images.length, paginationStart + 7);
   const image = active === null ? null : images[activeIndex];
   const previous = useCallback(() => setActive((current) => current === null ? null : (current - 1 + images.length) % images.length), [images.length]);
   const next = useCallback(() => setActive((current) => current === null ? null : (current + 1) % images.length), [images.length]);
@@ -28,28 +32,28 @@ export function PropertyGallery({ images }: { images: PropertyImage[] }) {
   }, [active, images.length, next, previous]);
 
   if (!images.length) return <div className="gallery gallery-empty">Property images will be added soon.</div>;
-  return <><div
-    className="gallery"
-    ref={galleryRef}
-    onScroll={(event) => {
-      const gallery = event.currentTarget;
-      const width = gallery.clientWidth;
-      if (width > 0) setGalleryIndex(Math.min(images.length - 1, Math.round(gallery.scrollLeft / width)));
-    }}
-  >
-    {images.map((item, index) => <button type="button" className={index === 0 ? "gallery-main" : "gallery-small"} onClick={() => setActive(index)} key={item.id} aria-label={`Open image ${index + 1} of ${images.length}`}><Image src={item.public_url} alt={item.alt_text} fill priority={index === 0} sizes="(max-width: 800px) 100vw, 66vw" /></button>)}
-    {images.length > 1 && <>
-      <span className="gallery-swipe-hint"><span>Swipe to see more images</span><ChevronRight aria-hidden="true" size={16} /></span>
-      <div className="gallery-pagination" aria-label="Property images">
-        {images.map((item, index) => <button
-          type="button"
-          key={item.id}
-          className={index === galleryIndex ? "active" : ""}
-          onClick={() => galleryRef.current?.scrollTo({ left: index * galleryRef.current.clientWidth, behavior: "smooth" })}
-          aria-label={`Show image ${index + 1} of ${images.length}`}
-          aria-current={index === galleryIndex ? "true" : undefined}
-        />)}
-      </div>
-    </>}
+  return <><div className="gallery-frame">
+    <div
+      className="gallery"
+      ref={galleryRef}
+      onScroll={(event) => {
+        const gallery = event.currentTarget;
+        const width = gallery.clientWidth;
+        if (width > 0) setGalleryIndex(Math.min(images.length - 1, Math.round(gallery.scrollLeft / width)));
+      }}
+    >
+      {images.map((item, index) => <button type="button" className={index === 0 ? "gallery-main" : "gallery-small"} onClick={() => setActive(index)} key={item.id} aria-label={`Open image ${index + 1} of ${images.length}`}><Image src={item.public_url} alt={item.alt_text} fill priority={index === 0} sizes="(max-width: 800px) 100vw, 66vw" /></button>)}
+      {images.length > 1 && <span className="gallery-swipe-hint"><span>Swipe to see more images</span><ChevronRight aria-hidden="true" size={16} /></span>}
+    </div>
+    {images.length > 1 && <div className="gallery-pagination" role="group" aria-label="Property image pagination">
+      {Array.from({ length: paginationEnd - paginationStart }, (_, offset) => paginationStart + offset).map((index) => <button
+        type="button"
+        key={images[index].id}
+        className={`${index === galleryIndex ? "active" : ""}${(index === paginationStart && paginationStart > 0) || (index === paginationEnd - 1 && paginationEnd < images.length) ? " edge" : ""}`}
+        onClick={() => galleryRef.current?.scrollTo({ left: index * galleryRef.current.clientWidth, behavior: "smooth" })}
+        aria-label={`Go to image ${index + 1}`}
+        aria-current={index === galleryIndex ? "true" : undefined}
+      />)}
+    </div>}
   </div>{image && <div className="lightbox" role="dialog" aria-modal="true" aria-label={`Property image ${activeIndex + 1} of ${images.length}`} onClick={() => setActive(null)}><button type="button" className="lightbox-close" onClick={() => setActive(null)} aria-label="Close gallery"><X /></button><button type="button" className="lightbox-nav previous" onClick={(event) => { event.stopPropagation(); previous(); }} aria-label="Previous image"><ChevronLeft /></button><div className="lightbox-image" onClick={(event) => event.stopPropagation()} onTouchStart={(event) => setTouchStart(event.touches[0].clientX)} onTouchEnd={(event) => { if (touchStart === null) return; const difference = event.changedTouches[0].clientX - touchStart; if (difference > 50) previous(); if (difference < -50) next(); setTouchStart(null); }}><Image src={image.public_url} alt={image.alt_text} fill sizes="100vw" priority/>{images.length > 1 && <div className="lightbox-pagination" aria-label="Choose image">{images.map((item, index) => <button type="button" key={item.id} className={index === activeIndex ? "active" : ""} onClick={(event) => { event.stopPropagation(); setActive(index); }} aria-label={`Show image ${index + 1} of ${images.length}`} aria-current={index === activeIndex ? "true" : undefined} />)}</div>}</div><div className="lightbox-thumbnails" onClick={(event) => event.stopPropagation()}>{images.map((item, index) => <button type="button" key={item.id} className={index === activeIndex ? "active" : ""} onClick={() => setActive(index)} aria-label={`View image ${index + 1}`}><Image src={item.public_url} alt="" fill sizes="84px" /></button>)}</div><span className="lightbox-count">{activeIndex + 1} / {images.length}</span><button type="button" className="lightbox-nav next" onClick={(event) => { event.stopPropagation(); next(); }} aria-label="Next image"><ChevronRight /></button></div>}</>;
 }
