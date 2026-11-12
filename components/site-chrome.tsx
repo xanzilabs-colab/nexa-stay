@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Building2, Heart, Home, Info, MessageCircle, Phone, Search, UserRound } from "lucide-react";
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
 import { siteAsset } from "@/lib/site-assets";
 
 const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "27730884239").replace(/\D/g, "");
@@ -94,11 +94,24 @@ export function Header() {
 }
 
 export function Footer() {
+  function requestStayAlerts(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const email = new FormData(event.currentTarget).get("email");
+    if (typeof email !== "string") return;
+    const subject = encodeURIComponent("NexaStay stay alerts");
+    const body = encodeURIComponent(`Please send me stay availability and offer updates at ${email.trim()}.`);
+    window.location.href = `mailto:hello@nexastay.co.za?subject=${subject}&body=${body}`;
+  }
+
   return <>
     <section className="newsletter">
       <div className="site-container newsletter-inner">
-        <div><h2>Need a hand finding a stay?</h2><p>Tell our local team what you’re looking for and we’ll help you choose.</p></div>
-        <Link className="button button-navy" href="/contact">Talk to our team</Link>
+        <div><h2>Get stay alerts</h2><p>New availability and offers from NexaStay, straight to your inbox.</p></div>
+        <form className="newsletter-form" onSubmit={requestStayAlerts}>
+          <label className="sr-only" htmlFor="newsletter-email">Your email address</label>
+          <input id="newsletter-email" name="email" type="email" required placeholder="Your email address" />
+          <button className="button button-navy" type="submit">Sign up</button>
+        </form>
       </div>
     </section>
     <footer className="site-footer">
@@ -109,11 +122,11 @@ export function Footer() {
               <Image src={siteAsset("logo.png")} alt="" width={42} height={42} />
               <span>Nexa<b>Stay</b></span>
             </Link>
-            <p>Thoughtful short-term stays across Gauteng, backed by a local team.</p>
+            <p>Thoughtful short-term stays across South Africa, backed by a local Gauteng team.</p>
           </div>
-          <div><h2>Stays</h2><Link href="/properties?development=ellipse">Ellipse</Link><Link href="/properties?development=munyaka">Munyaka</Link><Link href="/properties?development=the-blyde">The Blyde</Link><Link href="/properties">All properties</Link></div>
-          <div><h2>Company</h2><Link href="/about">About NexaStay</Link><Link href="/agents">Our agents</Link><Link href="/contact?topic=owners">Owners &amp; investors</Link><Link href="/contact">Contact</Link></div>
-          <div><h2>Contact</h2><a href="tel:+27730884239">+27 73 088 4239</a><a href="mailto:hello@nexastay.co.za">hello@nexastay.co.za</a><a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp us</a><span>Waterfall City, Midrand</span></div>
+          <div><h2>Stays</h2><ul><li><Link href="/properties?development=ellipse">Ellipse</Link></li><li><Link href="/properties?development=munyaka">Munyaka</Link></li><li><Link href="/properties?development=the-blyde">The Blyde</Link></li><li><Link href="/properties">All properties</Link></li></ul></div>
+          <div><h2>Company</h2><ul><li><Link href="/about">About NexaStay</Link></li><li><Link href="/agents">Our agents</Link></li><li><Link href="/contact?topic=owners">Owners &amp; investors</Link></li><li><Link href="/contact">Contact</Link></li></ul></div>
+          <div><h2>Contact</h2><ul><li><a href="tel:+27730884239">+27 73 088 4239</a></li><li><a href="mailto:hello@nexastay.co.za">hello@nexastay.co.za</a></li><li><a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp us</a></li><li><span>Waterfall City, Midrand</span></li></ul></div>
         </div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} NexaStay. All rights reserved.</span><span>Short-term stays across Gauteng</span></div>
       </div>

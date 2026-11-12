@@ -11,7 +11,7 @@ const root = join(process.cwd(), "public", "media", "agents");
 const agents = [
   ["alize-benadie", "Alize Benadie", "Candidate Property Practitioner", "Bushveld", "398_2bef4ec09ab540a98c8102f85569027e_t_w_304_h_304-white-woman.png"],
   ["alita-rich", "Alita Rich", "Candidate Property Practitioner", "Rustenburg", "398_24a150e3852a4ea6b56fa437cc2b8388_t_w_304_h_304-white-woman.png"],
-  ["amohelo-mthembu", "Amohelo Mthembu", "Candidate Property Practitioner", "Fourways", "398_764f557e770c45ccb8cda6e94ca7b248_t_w_304_h_304-black-woman.png"],
+  ["amohelo-mthembu", "Kamohelo Mthembu", "Candidate Property Practitioner", "Fourways", "398_764f557e770c45ccb8cda6e94ca7b248_t_w_304_h_304-black-woman.png"],
   ["alex-conradie", "Alex Conradie", "Principal Property Practitioner", "Rustenburg", "398_927afc3468054836865239f53e5ae90a_t_w_304_h_304-white-man.png"],
   ["alvina-naidu", "Alvina Naidu", "Administrator", "Bryanston", "398_4094df9037ef47b19172ae3d8ad42ff2_t_w_304_h_304-indian-woman.png"],
   ["amanda-velez", "Amanda Velez", "Operations Manager", "Western Seaboard", "398_16961aa6532247a49b66ddd59b2b7bf6_t_w_304_h_304-coloured-woman.png"],
