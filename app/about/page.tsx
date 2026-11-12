@@ -35,8 +35,12 @@ export default async function AboutPage() {
       </article>)}</div>
     </div></section>
     <section className="design-section"><div className="site-container">
-      <div className="section-heading-design"><div><span className="eyebrow">WHERE WE STAY</span><h2>Rooted in Waterfall City.</h2><p>Our collection is focused on the developments people return to.</p></div></div>
+      <div className="section-heading-design"><div><h2>Where we stay</h2><p>Our collection is focused on the developments people return to.</p></div></div>
       <DevelopmentShowcase properties={properties} />
+    </div></section>
+    <section className="about-final"><div>
+      <p className="eyebrow eyebrow-light">FIND YOUR PLACE</p><h2>Make your next stay<br />a good one.</h2>
+      <Link href="/properties" className="button button-teal">Explore properties <ArrowRight /></Link>
     </div></section>
   </main>;
 }
