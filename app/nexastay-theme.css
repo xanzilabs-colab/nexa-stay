@@ -332,11 +332,15 @@
 .lightbox-pagination::-webkit-scrollbar { display: none; }
 .lightbox-pagination button { width: 7px; height: 7px; flex: none; border: 0; border-radius: 99px; padding: 0; background: rgb(255 255 255 / 62%); cursor: pointer; }
 .lightbox-pagination button.active { width: 19px; background: #fff; }
+.nexastay-theme .lightbox .lightbox-nav { top: 50%; bottom: auto; z-index: 3; width: 48px; height: 48px; transform: translateY(-50%); border: 1px solid rgb(255 255 255 / 30%); border-radius: 50%; background: rgb(8 25 44 / 72%); }
+.nexastay-theme .lightbox .lightbox-nav:hover { background: var(--nx-teal-dark); }
+.nexastay-theme .lightbox .lightbox-nav.previous { left: 16px; }
+.nexastay-theme .lightbox .lightbox-nav.next { right: 16px; }
 .nexastay-theme .property-layout { display: grid; grid-template-columns: minmax(0, 1fr) 370px; align-items: start; gap: 50px; padding: 30px 0; }
 .nexastay-theme .property-content h1 { margin: 7px 0 9px; font-size: clamp(28px, 3vw, 39px); }
 .nexastay-theme .property-content h2 { margin-top: 30px; font-size: 21px; }
 .nexastay-theme .property-content > p:not(.location):not(.price) { max-width: 68ch; color: #3a4a5c; line-height: 1.7; }
-.nexastay-theme .property-content .description { margin: 0; }
+.nexastay-theme .property-content .description { display: -webkit-box; overflow: hidden; margin: 0; -webkit-box-orient: vertical; -webkit-line-clamp: 5; }
 .nexastay-theme .property-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; margin: 0; padding: 0; list-style: none; }
 .nexastay-theme .property-facts li { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--nx-line); font-size: 13px; }
 .nexastay-theme .property-facts li span { color: var(--nx-muted); }
