@@ -7,9 +7,8 @@ export function OwnerPanel() {
   return <div className="site-container">
     <div className="owner-panel">
       <div className="owner-panel-copy">
-        <span className="eyebrow eyebrow-light">OWN PROPERTY IN GAUTENG?</span>
-        <h2>Talk to NexaStay.</h2>
-        <p>Speak to the team about how short-term stays are presented, enquired on, and looked after.</p>
+        <h2>Own property in Gauteng? Talk to NexaStay.</h2>
+        <p>Speak to the team about how short-term stays are presented, enquired on and looked after.</p>
         <ul><li><Check />Professional, clearly presented listings</li><li><Check />A local team handling guest enquiries</li><li><Check />A focus on the developments guests return to</li></ul>
         <Link className="button button-teal" href="/contact?topic=owners">Owners &amp; investors enquiry <ArrowRight /></Link>
       </div>

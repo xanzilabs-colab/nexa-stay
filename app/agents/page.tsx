@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { AgentGrid } from "@/components/agent-grid";
 import { OwnerPanel } from "@/components/owner-panel";
-import { getAgents } from "@/lib/data";
+import { getTeamAgents } from "@/lib/data";
 
 export default async function AgentsPage() {
-  const agents = await getAgents();
+  const agents = await getTeamAgents();
   return <main className="reference-page">
     <section className="page-intro"><div className="site-container">
       <div className="breadcrumbs"><Link href="/">Home</Link><span>›</span><span>Agents</span></div>

@@ -4,7 +4,7 @@ import {
   ArrowRight, Building2, ChevronDown, MapPin,
   MessageCircle, Search, ShieldCheck, Users,
 } from "lucide-react";
-import { getAgents, getProperties } from "@/lib/data";
+import { getProperties, getTeamAgents } from "@/lib/data";
 import { siteAsset } from "@/lib/site-assets";
 import { developments } from "@/lib/developments";
 import { AgentGrid } from "@/components/agent-grid";
@@ -47,7 +47,7 @@ function priceLabel(property: Property) {
 }
 
 export default async function Home() {
-  const [properties, agents] = await Promise.all([getProperties(), getAgents()]);
+  const [properties, agents] = await Promise.all([getProperties(), getTeamAgents()]);
   const featured = properties.filter((property) => property.featured);
   const featuredStays = (featured.length ? featured : properties).slice(0, 6);
   const priceRows = developments.map((development) => ({

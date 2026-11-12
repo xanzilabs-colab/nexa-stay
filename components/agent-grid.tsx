@@ -16,8 +16,13 @@ export function AgentGrid({ agents }: { agents: Agent[] }) {
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") setSelected(null);
     };
+    const previousOverflow = document.body.style.overflow;
     document.addEventListener("keydown", closeOnEscape);
-    return () => document.removeEventListener("keydown", closeOnEscape);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", closeOnEscape);
+      document.body.style.overflow = previousOverflow;
+    };
   }, [selected]);
 
   const whatsapp = (selected?.whatsapp || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "27730884239").replace(/\D/g, "");
