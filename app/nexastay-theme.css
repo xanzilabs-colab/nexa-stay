@@ -516,10 +516,10 @@
   .section-heading-design p { font-size: 12px; }
   .section-heading-design > .text-link { margin: 0; }
   .featured-grid,
-  .catalog-grid { display: flex; overflow-x: auto; gap: 12px; margin-inline: -16px; padding: 2px 16px 12px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .catalog-grid { display: flex; overflow-x: auto; gap: 12px; margin-inline: -16px; padding: 2px 20px 12px; scroll-padding-inline: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .featured-grid::-webkit-scrollbar,
   .catalog-grid::-webkit-scrollbar { display: none; }
-  .featured-grid > .stay-card { width: 82vw; max-width: 330px; flex: none; scroll-snap-align: start; }
+  .featured-grid > .stay-card { width: 75vw; max-width: 290px; flex: none; scroll-snap-align: start; }
   .featured-grid .stay-card-image { aspect-ratio: 16 / 11; }
   .stay-card { border-radius: 12px; }
   .stay-card-body { padding: 13px 14px 14px; }
@@ -527,9 +527,9 @@
   .stay-card h3 { font-size: 14px; }
   .stay-specs { gap: 12px; font-size: 10px; }
   .stay-card-actions .button { min-height: 42px; }
-  .development-grid { display: flex; overflow-x: auto; gap: 11px; margin-inline: -16px; padding: 2px 16px 12px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .development-grid { display: flex; overflow-x: auto; gap: 11px; margin-inline: -16px; padding: 2px 20px 12px; scroll-padding-inline: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .development-grid::-webkit-scrollbar { display: none; }
-  .development-tile { width: 78vw; max-width: 320px; min-height: 350px; flex: none; border-radius: 12px; scroll-snap-align: start; }
+  .development-tile { width: 70vw; max-width: 280px; min-height: 330px; flex: none; border-radius: 12px; scroll-snap-align: start; }
   .development-tile-copy { padding: 19px; }
   .development-tile-copy h3 { font-size: 24px; }
   .development-tile-copy p { font-size: 11px; }
@@ -550,7 +550,7 @@
   .rates-table .mobile-rate-specs { display: block; margin-top: 3px; color: var(--nx-muted); font-size: 10px; }
   .rates-table .rate-price { grid-column: 2; grid-row: 2; text-align: right; }
   .rates-table td:last-child { display: none; }
-  .moments-grid { display: flex; overflow-x: auto; gap: 9px; margin-inline: -16px; padding: 0 16px 9px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .moments-grid { display: flex; overflow-x: auto; gap: 9px; margin-inline: -16px; padding: 0 20px 9px; scroll-padding-inline: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .moments-grid::-webkit-scrollbar { display: none; }
   .moments-grid figure { width: 66vw; height: 245px; flex: none; border-radius: 12px; scroll-snap-align: start; }
   .moments-grid .moment-feature { width: 76vw; height: 280px; }
@@ -561,7 +561,7 @@
   .why-icon svg { width: 19px; }
   .why-grid h3 { margin: 10px 0 4px; font-size: 13px; }
   .why-grid p { font-size: 11px; }
-  .agent-design-grid { display: flex; overflow-x: auto; gap: 10px; margin-inline: -16px; padding: 2px 16px 12px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .agent-design-grid { display: flex; overflow-x: auto; gap: 10px; margin-inline: -16px; padding: 2px 20px 12px; scroll-padding-inline: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .agent-design-grid::-webkit-scrollbar { display: none; }
   .agent-design-card,
   .agent-design-card:nth-child(n + 4) { display: block; width: 56vw; max-width: 230px; flex: none; border-radius: 11px; scroll-snap-align: start; }
@@ -602,14 +602,15 @@
   .development-chips { margin-inline: -16px; padding: 5px 16px 10px; }
   .development-chips button { min-height: 33px; }
   .catalog-results-heading { padding: 8px 0 12px; font-size: 12px; }
-  .catalog-grid > .stay-card { width: 82vw; max-width: 330px; flex: none; scroll-snap-align: start; }
+  .catalog-grid > .stay-card { width: 75vw; max-width: 290px; flex: none; scroll-snap-align: start; }
   .empty-results { padding: 42px 12px; }
   .empty-results h2 { font-size: 19px; }
   .nexastay-theme .agents-page { padding: 36px 16px 48px; }
   .nexastay-theme .agents-page > h1 { font-size: 29px; }
   .nexastay-theme .agents-page > .lead { font-size: 13px; }
-  .nexastay-theme .agent-grid { display: flex; overflow-x: auto; gap: 10px; margin-inline: -16px; padding: 0 16px 12px; }
-  .nexastay-theme .agent-card { width: 58vw; max-width: 230px; flex: none; }
+  .nexastay-theme .agent-grid { display: flex; overflow-x: auto; gap: 10px; margin-inline: -16px; padding: 0 20px 12px; scroll-padding-inline: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .nexastay-theme .agent-grid::-webkit-scrollbar { display: none; }
+  .nexastay-theme .agent-card { width: 54vw; max-width: 215px; flex: none; scroll-snap-align: start; }
   .nexastay-theme .property-page { padding: 0 16px 42px; }
   .nexastay-theme .property-page .gallery { display: flex; overflow-x: auto; gap: 0; margin-inline: -16px; border-radius: 0; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .nexastay-theme .property-page .gallery::-webkit-scrollbar { display: none; }
@@ -663,7 +664,7 @@
   .hero-content > h1 { font-size: 30px; }
   .search-tabs button { padding-inline: 8px; font-size: 10px; }
   .featured-grid > .stay-card,
-  .catalog-grid > .stay-card { width: 86vw; }
+  .catalog-grid > .stay-card { width: 75vw; max-width: 270px; }
   .stay-specs { gap: 8px; }
   .stay-specs li { gap: 3px; font-size: 9px; }
   .mobile-actionbar .button { padding-inline: 9px; }
