@@ -1,21 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowRight, Building2, Check, ChevronDown, MapPin,
+  ArrowRight, Building2, ChevronDown, MapPin,
   MessageCircle, Search, ShieldCheck, Users,
 } from "lucide-react";
-import { getAgents, getProperties } from "@/lib/data";
+import { getProperties, getTeamAgents } from "@/lib/data";
 import { siteAsset } from "@/lib/site-assets";
+import { developments } from "@/lib/developments";
+import { AgentGrid } from "@/components/agent-grid";
+import { DevelopmentShowcase } from "@/components/development-showcase";
 import { HeroMedia } from "@/components/hero-media";
 import { HeroSearch } from "@/components/hero-search";
+import { OwnerPanel } from "@/components/owner-panel";
 import { PropertyCard } from "@/components/property-card";
 import type { Property } from "@/types/property";
-
-const developments = [
-  { slug: "ellipse", name: "Ellipse", location: "Waterfall City, Midrand", description: "Refined city apartments with an easy, connected address.", fallbackImage: "hero/Ellipse-ns-slider-1-1024x576.jpeg" },
-  { slug: "munyaka", name: "Munyaka", location: "Jukskei View, Midrand", description: "Modern lagoon-living apartments made for unhurried stays.", fallbackImage: "hero/04.jpg" },
-  { slug: "the-blyde", name: "The Blyde", location: "Pretoria, Gauteng", description: "Resort-inspired surroundings with space to settle in.", fallbackImage: "hero/jpegorpng.jpeg" },
-];
 
 const moments = [
   { path: "ssstik.io_1787129766769.jpg", className: "moment-feature", alt: "A NexaStay apartment interior" },
@@ -48,18 +46,8 @@ function priceLabel(property: Property) {
   return `R${property.price_per_night.toLocaleString()}${property.price_period === "per_month" ? " / month" : " / night"}`;
 }
 
-function developmentImage(properties: Property[], slug: string, fallbackImage: string) {
-  return properties.find((property) => property.development_slug === slug)?.images.find((image) => image.is_primary)?.public_url
-    ?? siteAsset(fallbackImage);
-}
-
-function developmentStartingPrice(properties: Property[], slug: string) {
-  const prices = properties.filter((property) => property.development_slug === slug).map((property) => property.price_per_night);
-  return prices.length ? Math.min(...prices) : 0;
-}
-
 export default async function Home() {
-  const [properties, agents] = await Promise.all([getProperties(), getAgents()]);
+  const [properties, agents] = await Promise.all([getProperties(), getTeamAgents()]);
   const featured = properties.filter((property) => property.featured);
   const featuredStays = (featured.length ? featured : properties).slice(0, 6);
   const priceRows = developments.map((development) => ({
@@ -87,7 +75,6 @@ export default async function Home() {
       <div className="hero-background"><HeroMedia /></div>
       <div className="hero-overlay" />
       <div className="site-container hero-content">
-        <p className="eyebrow eyebrow-light">SHORT-TERM STAYS, GAUTENG</p>
         <h1>Find your place to stay in Gauteng.</h1>
         <p className="hero-subtitle">Apartments in Waterfall City, Midrand and Pretoria, with a local team behind every stay.</p>
         <HeroSearch />
@@ -134,21 +121,7 @@ export default async function Home() {
           <div><span className="eyebrow">WHERE WE STAY</span><h2>Stay in Waterfall City &amp; Pretoria</h2><p>Our collection is focused on the developments people return to.</p></div>
           <Link className="text-link" href="/properties">Explore all developments <ArrowRight /></Link>
         </div>
-        <div className="development-grid">
-          {developments.map((development) => {
-            const count = properties.filter((property) => property.development_slug === development.slug).length;
-            const startingPrice = developmentStartingPrice(properties, development.slug);
-            return <Link className="development-tile" href={`/properties?development=${development.slug}`} key={development.slug}>
-              <Image src={developmentImage(properties, development.slug, development.fallbackImage)} alt={`${development.name} accommodation`} fill sizes="(max-width: 700px) 82vw, (max-width: 1100px) 48vw, 390px" />
-              <div className="development-tile-copy">
-                <span><MapPin size={14} />{development.location}</span>
-                <h3>{development.name}</h3>
-                <p>{development.description}</p>
-                <div><span>{count} {count === 1 ? "offering" : "offerings"}{startingPrice ? ` · from R${startingPrice.toLocaleString()}` : ""}</span><ArrowRight /></div>
-              </div>
-            </Link>;
-          })}
-        </div>
+        <DevelopmentShowcase properties={properties} />
       </div>
     </section>
 
@@ -199,12 +172,7 @@ export default async function Home() {
           <div><span className="eyebrow">HERE TO HELP</span><h2>Meet your local experts</h2><p>Our team knows these places and is ready to help you find the right fit.</p></div>
           <Link className="text-link" href="/agents">Meet all agents <ArrowRight /></Link>
         </div>
-        <div className="agent-design-grid">{agents.slice(0, 5).map((agent, index) => <Link className="agent-design-card" href={`/agents/${agent.slug}`} key={agent.id}>
-          <div className={`agent-design-image agent-tone-${index % 5}`}>
-            {agent.image_url ? <Image src={agent.image_url} alt={agent.name} fill sizes="(max-width: 700px) 56vw, 220px" /> : <span>{agent.name.split(" ").map((part: string) => part[0]).join("").slice(0, 3)}</span>}
-          </div>
-          <div><span className="agent-position">{agent.position}</span><h3>{agent.name}</h3><p>{agent.bio}</p><span className="text-link">View profile <ArrowRight /></span></div>
-        </Link>)}</div>
+        <AgentGrid agents={agents.slice(0, 5)} />
       </div>
     </section>
 
@@ -219,15 +187,7 @@ export default async function Home() {
     </section>
 
     <section className="design-section owner-section-wrap">
-      <div className="site-container">
-        <div className="owner-panel">
-          <div className="owner-panel-copy"><span className="eyebrow eyebrow-light">OWN PROPERTY IN GAUTENG?</span><h2>Talk to NexaStay.</h2><p>Speak to the team about how short-term stays are presented, enquired on, and looked after.</p>
-            <ul><li><Check />Professional, clearly presented listings</li><li><Check />A local team handling guest enquiries</li><li><Check />A focus on the developments guests return to</li></ul>
-            <Link className="button button-teal" href="/contact?topic=owners">Owners &amp; investors enquiry <ArrowRight /></Link>
-          </div>
-          <div className="owner-panel-image"><Image src={siteAsset("hero/Ellipse-ns-slider-1-1024x576.jpeg")} alt="Ellipse residences in Waterfall City" fill sizes="(max-width: 800px) 100vw, 50vw" /></div>
-        </div>
-      </div>
+      <OwnerPanel />
     </section>
   </main>;
 }

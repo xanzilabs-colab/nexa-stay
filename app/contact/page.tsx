@@ -1,9 +1,29 @@
 import Link from "next/link";
 import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ContactEnquiryForm } from "@/components/contact-enquiry-form";
 
-const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "").replace(/\D/g, "");
-const whatsappMessage = encodeURIComponent("Hi NexaStay, I would like help finding a stay.");
+const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "27730884239").replace(/\D/g, "");
+const whatsappMessage = encodeURIComponent("Hi NexaStay");
 
-export default function ContactPage() {
-  return <main className="contact-page"><section className="contact-intro"><p className="eyebrow">GET IN TOUCH</p><h1>Let&apos;s find the right stay.</h1><p>Whether you have a question about a property or need help choosing between stays, the NexaStay team is here to help.</p></section><section className="contact-options"><a href="mailto:hello@nexastay.co.za"><Mail size={22}/><div><p className="eyebrow">EMAIL</p><h2>hello@nexastay.co.za</h2><span>Send us your enquiry</span></div></a><a href="tel:+27730884239"><Phone size={22}/><div><p className="eyebrow">PHONE</p><h2>+27 73 088 4239</h2><span>Speak to our bookings team</span></div></a><a href={whatsappNumber ? `https://wa.me/${whatsappNumber}?text=${whatsappMessage}` : "#"} target="_blank"><MessageCircle size={22}/><div><p className="eyebrow">WHATSAPP</p><h2>Message NexaStay</h2><span>Quick answers when you need them</span></div></a><div><MapPin size={22}/><div><p className="eyebrow">OUR FOCUS</p><h2>Waterfall City, Midrand</h2><span>Short-term stays across Gauteng</span></div></div></section><section className="contact-cta"><p className="eyebrow light">READY TO EXPLORE?</p><h2>Start with a place you&apos;ll want to stay.</h2><Link href="/properties" className="button teal">Browse properties</Link></section></main>;
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ topic?: string }> }) {
+  const { topic } = await searchParams;
+  return <main className="reference-page">
+    <section className="page-intro"><div className="site-container">
+      <div className="breadcrumbs"><Link href="/">Home</Link><span>›</span><span>Contact</span></div>
+      <h1>Let&apos;s find the right stay</h1>
+      <p>Whether you have a question about a property or need help choosing between stays, the NexaStay team is here to help.</p>
+    </div></section>
+    <section className="contact-design-section"><div className="site-container contact-design-layout">
+      <div className="contact-left">
+        <div className="contact-tiles">
+          <a className="contact-tile contact-tile-wide" href="mailto:hello@nexastay.co.za"><span><Mail /></span><p><small>Email</small><strong>hello@nexastay.co.za</strong></p></a>
+          <a className="contact-tile" href="tel:+27730884239"><span><Phone /></span><p><small>Phone</small><strong>+27 73 088 4239</strong></p></a>
+          <a className="contact-tile" href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`} target="_blank" rel="noreferrer"><span><MessageCircle /></span><p><small>WhatsApp</small><strong>Message us</strong></p></a>
+          <div className="contact-tile contact-tile-wide"><span><MapPin /></span><p><small>Our focus</small><strong>Waterfall City, Midrand</strong></p></div>
+        </div>
+        <div className="contact-map"><iframe loading="lazy" title="Waterfall City, Midrand" src="https://www.google.com/maps?q=Waterfall+City+Midrand&output=embed" /></div>
+      </div>
+      <ContactEnquiryForm initialTopic={topic === "owners" ? "Owners & investors" : topic} />
+    </div></section>
+  </main>;
 }
