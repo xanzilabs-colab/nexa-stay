@@ -7,6 +7,11 @@ import type { Agent } from "@/types/property";
 
 const tones = ["agent-tone-1", "agent-tone-2", "agent-tone-3", "agent-tone-4", ""];
 const initials = (name: string) => name.split(" ").map((part) => part[0]).join("").slice(0, 3);
+const portraitSource = (url: string) => {
+  const source = new URL(url);
+  source.searchParams.set("v", "2");
+  return source.href;
+};
 
 export function AgentGrid({ agents }: { agents: Agent[] }) {
   const [selected, setSelected] = useState<Agent | null>(null);
@@ -37,7 +42,7 @@ export function AgentGrid({ agents }: { agents: Agent[] }) {
     >
       <div className={`agent-design-image ${tones[index % tones.length]}`}>
         {agent.image_url
-          ? <Image src={agent.image_url} alt={agent.name} fill sizes="(max-width: 700px) 56vw, 220px" />
+          ? <Image src={portraitSource(agent.image_url)} alt={agent.name} fill sizes="(max-width: 900px) 70vw, 260px" unoptimized />
           : <span>{initials(agent.name)}</span>}
       </div>
       <div><span className="agent-position">{agent.position}</span><h2>{agent.name}</h2><p>{agent.bio}</p><span className="text-link">View profile <ArrowRight /></span></div>
@@ -48,7 +53,7 @@ export function AgentGrid({ agents }: { agents: Agent[] }) {
       <section className="agent-sheet-card" role="dialog" aria-modal="true" aria-labelledby="selected-agent-name">
         <button className="agent-sheet-close" type="button" onClick={() => setSelected(null)} aria-label="Close agent details"><X /></button>
         <div className={`agent-sheet-avatar ${tones[agents.indexOf(selected) % tones.length]}`}>
-          {selected.image_url ? <Image src={selected.image_url} alt="" fill sizes="76px" /> : initials(selected.name)}
+          {selected.image_url ? <Image src={portraitSource(selected.image_url)} alt="" fill sizes="76px" unoptimized /> : initials(selected.name)}
         </div>
         <p className="agent-position">{selected.position}</p>
         <h2 id="selected-agent-name">{selected.name}</h2>

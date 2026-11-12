@@ -93,7 +93,7 @@ export function Header() {
         <span>Short-term stays across Gauteng</span>
         <div>
           <a href="tel:+27730884239">Call +27 73 088 4239</a>
-          <a href="mailto:hello@nexastay.co.za">hello@nexastay.co.za</a>
+          <a href="mailto:enquiries@nexastay.co.za">enquiries@nexastay.co.za</a>
           <Link href="/contact?topic=owners">List your property</Link>
         </div>
       </div>
@@ -131,7 +131,7 @@ export function Footer() {
     if (typeof email !== "string") return;
     const subject = encodeURIComponent("NexaStay stay alerts");
     const body = encodeURIComponent(`Please send me stay availability and offer updates at ${email.trim()}.`);
-    window.location.href = `mailto:hello@nexastay.co.za?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:enquiries@nexastay.co.za?subject=${subject}&body=${body}`;
   }
 
   return <>
@@ -157,7 +157,7 @@ export function Footer() {
           </div>
           <div><h2>Stays</h2><ul><li><Link href="/properties?development=ellipse">Ellipse</Link></li><li><Link href="/properties?development=munyaka">Munyaka</Link></li><li><Link href="/properties?development=the-blyde">The Blyde</Link></li><li><Link href="/properties">All properties</Link></li></ul></div>
           <div><h2>Company</h2><ul><li><Link href="/about">About NexaStay</Link></li><li><Link href="/agents">Our agents</Link></li><li><Link href="/contact?topic=owners">Owners &amp; investors</Link></li><li><Link href="/contact">Contact</Link></li></ul></div>
-          <div><h2>Contact</h2><ul><li><a href="tel:+27730884239">+27 73 088 4239</a></li><li><a href="mailto:hello@nexastay.co.za">hello@nexastay.co.za</a></li><li><a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp us</a></li><li><span>Waterfall City, Midrand</span></li></ul></div>
+          <div><h2>Contact</h2><ul><li><a href="tel:+27730884239">+27 73 088 4239</a></li><li><a href="mailto:enquiries@nexastay.co.za">enquiries@nexastay.co.za</a></li><li><a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp us</a></li><li><span>Waterfall City, Midrand</span></li></ul></div>
         </div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} NexaStay. All rights reserved.</span><span>Short-term stays across Gauteng</span></div>
       </div>

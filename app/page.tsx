@@ -58,7 +58,7 @@ export default async function Home() {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
     name: "NexaStay",
-    email: "hello@nexastay.co.za",
+    email: "enquiries@nexastay.co.za",
     telephone: "+27730884239",
     areaServed: "Gauteng, South Africa",
     address: {

@@ -26,7 +26,7 @@ export function ContactEnquiryForm({ initialTopic }: { initialTopic?: string }) 
     const data = new FormData(form);
     const subject = `Website enquiry: ${data.get("topic")}`;
     const body = messageFrom(data);
-    window.location.assign(`mailto:hello@nexastay.co.za?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+    window.location.assign(`mailto:enquiries@nexastay.co.za?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
   }
 
   return <form className="contact-form-wrap" onSubmit={submit}>
@@ -42,7 +42,7 @@ export function ContactEnquiryForm({ initialTopic }: { initialTopic?: string }) 
       </label>
       <label className="contact-field-wide">Message<textarea name="message" rows={4} placeholder="Dates, guests, preferred development…" required /></label>
       <button className="button button-whatsapp contact-field-wide" type="submit"><MessageCircle />Send on WhatsApp</button>
-      <p className="contact-email-fallback contact-field-wide">or <a href="mailto:hello@nexastay.co.za" onClick={sendEmail}>send by email</a></p>
+      <p className="contact-email-fallback contact-field-wide">or <a href="mailto:enquiries@nexastay.co.za" onClick={sendEmail}>send by email</a></p>
     </div>
   </form>;
 }

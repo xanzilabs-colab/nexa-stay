@@ -25,7 +25,7 @@ for (const [slug, name, position, location, filename] of agents) {
   const { error: uploadError } = await supabase.storage.from("agent-images").upload(storagePath, readFileSync(join(root, filename)), { upsert: true, contentType: "image/png", cacheControl: "31536000" });
   if (uploadError) throw uploadError;
   const { data: urlData } = supabase.storage.from("agent-images").getPublicUrl(storagePath);
-  const profile = { name, slug, position, bio: `${position} serving ${location}. Contact NexaStay for booking assistance.`, phone: "+27730884239", whatsapp: "27730884239", email: `hello@nexastay.co.za`, image_path: storagePath, image_url: urlData.publicUrl, active: true };
+  const profile = { name, slug, position, bio: `${position} serving ${location}. Contact NexaStay for booking assistance.`, phone: "+27730884239", whatsapp: "27730884239", email: "enquiries@nexastay.co.za", image_path: storagePath, image_url: urlData.publicUrl, active: true };
   const { data: existing, error: lookupError } = await supabase.from("agents").select("id").eq("slug", slug).maybeSingle();
   if (lookupError) throw lookupError;
   const result = existing ? await supabase.from("agents").update(profile).eq("id", existing.id) : await supabase.from("agents").insert(profile);
