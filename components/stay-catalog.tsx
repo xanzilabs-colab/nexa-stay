@@ -76,7 +76,7 @@ export function StayCatalog({ properties, initialFilters }: { properties: Proper
       {developments.map((item) => <button type="button" key={item.slug} className={development === item.slug ? "active" : ""} onClick={() => setDevelopment(item.slug)}>{item.name}</button>)}
     </div>
     <div className="catalog-results-heading"><strong>{visible.length} {visible.length === 1 ? "stay" : "stays"}{development !== "all" ? ` at ${developments.find((item) => item.slug === development)?.name}` : " available"}{dateSummary}</strong>{savedOnly && <span>Saved stays</span>}</div>
-    {visible.length ? <div className="catalog-grid">{visible.map((property) => <PropertyCard property={property} key={property.id} />)}</div>
+    {visible.length ? <div className="catalog-grid">{visible.map((property) => <PropertyCard property={property} showGuestsOnImage key={property.id} />)}</div>
       : <div className="empty-results"><h2>{savedOnly ? "No saved stays yet" : "No stays match those filters"}</h2><p>{savedOnly ? "Tap the heart on any stay to save it here." : "Try widening your search or clearing one of the filters."}</p><button className="button button-outline" type="button" onClick={() => { setQuery(""); setDevelopment("all"); setGuests(""); setBedrooms(""); setMaxPrice(""); setSavedOnly(false); }}>Clear filters</button></div>}
   </div>;
 }

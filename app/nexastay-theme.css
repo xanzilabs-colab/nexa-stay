@@ -150,6 +150,8 @@
 .stay-card-image.image-pending { display: grid; place-items: center; color: var(--nx-navy); font-size: 13px; font-weight: 600; }
 .stay-badge { position: absolute; top: 12px; left: 12px; z-index: 1; border-radius: 5px; padding: 5px 9px; background: var(--nx-amber); color: #fff; font-size: 10px; font-weight: 700; }
 .stay-image-count { position: absolute; bottom: 11px; left: 11px; display: inline-flex; align-items: center; gap: 5px; border-radius: 5px; padding: 4px 8px; background: rgb(8 25 44 / 78%); color: #fff; font-size: 11px; font-weight: 600; }
+.catalog-grid .stay-image-count { top: 10px; right: auto; bottom: auto; left: 10px; }
+.stay-image-guests { position: absolute; bottom: 10px; left: 10px; z-index: 1; display: inline-flex; align-items: center; gap: 5px; border-radius: 6px; padding: 6px 9px; background: rgb(8 25 44 / 78%); color: #fff; font-size: 11px; font-weight: 600; }
 .stay-image-price { position: absolute; right: 10px; bottom: 10px; z-index: 1; border-radius: 6px; padding: 6px 9px; background: #fff; color: var(--nx-navy); font-size: 14px; font-weight: 800; box-shadow: 0 2px 8px rgb(0 0 0 / 18%); }
 .stay-image-price small { color: var(--nx-muted); font-size: 10px; font-weight: 600; }
 .save-stay { position: absolute; z-index: 2; top: 10px; right: 10px; display: grid; width: 37px; height: 37px; place-items: center; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 2px 8px rgb(0 0 0 / 18%); color: var(--nx-navy); transition: transform .2s, color .2s; }
@@ -408,7 +410,7 @@
 .about-final h2 { margin: 0 0 20px; color: #fff; font-size: clamp(30px, 4vw, 44px); }
 .agent-design-card { width: 100%; padding: 0; color: var(--nx-ink); text-align: left; }
 .agent-design-card h2 { margin: 3px 0 6px; font-size: 14px; }
-.agent-design-card > div:last-child { min-height: 160px; }
+.agent-design-card > div:last-child { min-height: 0; }
 .agent-sheet { position: fixed; z-index: 110; inset: 0; display: grid; place-items: center; padding: 20px; background: rgb(8 25 44 / 58%); }
 .agent-sheet-card { position: relative; width: min(460px, 100%); border-radius: 14px; padding: 30px; background: #fff; box-shadow: 0 22px 70px rgb(0 0 0 / 25%); }
 .agent-sheet-close { position: absolute; top: 13px; right: 13px; display: grid; width: 36px; height: 36px; place-items: center; border-radius: 50%; background: var(--nx-bg); color: var(--nx-navy); }
@@ -546,6 +548,7 @@
   .featured-grid > .stay-card { width: 75vw; max-width: 290px; flex: none; scroll-snap-align: start; }
   .catalog-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; overflow: visible; margin: 0; padding: 2px 0 12px; scroll-snap-type: none; }
   .catalog-grid > .stay-card { width: auto; max-width: none; min-width: 0; flex: initial; scroll-snap-align: none; }
+  .catalog-grid .stay-image-guests { bottom: 7px; left: 7px; padding: 5px 7px; font-size: 10px; }
   .featured-grid .stay-card-image { aspect-ratio: 16 / 11; }
   .stay-card { border-radius: 12px; }
   .stay-card-body { padding: 13px 14px 14px; }
@@ -555,7 +558,6 @@
   .stay-card-actions .button { min-height: 42px; }
   .catalog-grid .stay-card-image { aspect-ratio: 4 / 3; }
   .catalog-grid .stay-card-body { padding: 10px; }
-  .catalog-grid .stay-image-count { top: 10px; right: auto; bottom: auto; left: 10px; }
   .catalog-grid .stay-image-price { background: rgb(255 255 255 / 50%); backdrop-filter: blur(6px); }
   .catalog-grid .stay-image-price { right: 7px; bottom: 7px; padding: 5px 7px; font-size: 12px; }
   .catalog-grid .stay-image-price small { font-size: 8px; }
