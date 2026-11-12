@@ -40,7 +40,6 @@ export default function Login() {
     <main className="admin-login">
       <section className="admin-login-panel" aria-labelledby="admin-login-title">
         <div className="admin-login-art">
-          <span className="admin-login-art-icon"><ShieldCheck aria-hidden="true" /></span>
           <p className="eyebrow">NEXASTAY WORKSPACE</p>
           <h1>Good stays start with good service.</h1>
           <p>Manage guest enquiries and keep every stay moving smoothly with the NexaStay team.</p>

@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { isAdminSession } from "@/lib/admin-auth";
+import { siteAsset } from "@/lib/site-assets";
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   const authenticated = await isAdminSession();
@@ -11,8 +13,8 @@ export default async function AdminLayout({ children }: { children: ReactNode })
         <div className="admin-topbar-inner">
           <div className="admin-topbar-primary">
             <Link className="admin-brand" href={authenticated ? "/admin" : "/"}>
-              <span className="admin-brand-mark">N</span>
-              <span>Nexa<b>Stay</b><small>ADMIN</small></span>
+              <Image className="admin-brand-logo" src={siteAsset("logo.png")} alt="NexaStay" width={64} height={64} />
+              <span><small>ADMIN</small></span>
             </Link>
             {authenticated ? (
               <form action="/api/admin/logout" method="post">
