@@ -150,6 +150,8 @@
 .stay-card-image.image-pending { display: grid; place-items: center; color: var(--nx-navy); font-size: 13px; font-weight: 600; }
 .stay-badge { position: absolute; top: 12px; left: 12px; z-index: 1; border-radius: 5px; padding: 5px 9px; background: var(--nx-amber); color: #fff; font-size: 10px; font-weight: 700; }
 .stay-image-count { position: absolute; bottom: 11px; left: 11px; display: inline-flex; align-items: center; gap: 5px; border-radius: 5px; padding: 4px 8px; background: rgb(8 25 44 / 78%); color: #fff; font-size: 11px; font-weight: 600; }
+.stay-image-price { position: absolute; right: 10px; bottom: 10px; z-index: 1; border-radius: 6px; padding: 6px 9px; background: #fff; color: var(--nx-navy); font-size: 14px; font-weight: 800; box-shadow: 0 2px 8px rgb(0 0 0 / 18%); }
+.stay-image-price small { color: var(--nx-muted); font-size: 10px; font-weight: 600; }
 .save-stay { position: absolute; z-index: 2; top: 10px; right: 10px; display: grid; width: 37px; height: 37px; place-items: center; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 2px 8px rgb(0 0 0 / 18%); color: var(--nx-navy); transition: transform .2s, color .2s; }
 .save-stay:hover { transform: scale(1.08); }
 .save-stay.saved { color: #d6334a; }
@@ -326,6 +328,10 @@
 .nexastay-theme .property-page .gallery button { position: relative; overflow: hidden; border: 0; padding: 0; background: var(--nx-navy); }
 .nexastay-theme .property-page .gallery .gallery-main { grid-row: span 2; }
 .nexastay-theme .property-page .gallery img { object-fit: cover; }
+.lightbox-pagination { position: absolute; z-index: 2; bottom: 10px; left: 50%; display: flex; max-width: calc(100% - 28px); align-items: center; gap: 7px; overflow-x: auto; transform: translateX(-50%); border-radius: 99px; padding: 8px 10px; background: rgb(8 25 44 / 68%); scrollbar-width: none; }
+.lightbox-pagination::-webkit-scrollbar { display: none; }
+.lightbox-pagination button { width: 7px; height: 7px; flex: none; border: 0; border-radius: 99px; padding: 0; background: rgb(255 255 255 / 62%); cursor: pointer; }
+.lightbox-pagination button.active { width: 19px; background: #fff; }
 .nexastay-theme .property-layout { display: grid; grid-template-columns: minmax(0, 1fr) 370px; align-items: start; gap: 50px; padding: 30px 0; }
 .nexastay-theme .property-content h1 { margin: 7px 0 9px; font-size: clamp(28px, 3vw, 39px); }
 .nexastay-theme .property-content h2 { margin-top: 30px; font-size: 21px; }
@@ -544,8 +550,8 @@
   .stay-card-actions .button { min-height: 42px; }
   .catalog-grid .stay-card-image { aspect-ratio: 4 / 3; }
   .catalog-grid .stay-card-body { padding: 10px; }
-  .catalog-grid .stay-price { font-size: 17px; }
-  .catalog-grid .stay-price small { font-size: 9px; }
+  .catalog-grid .stay-image-price { right: 7px; bottom: 7px; padding: 5px 7px; font-size: 12px; }
+  .catalog-grid .stay-image-price small { font-size: 8px; }
   .catalog-grid .stay-card h3 { font-size: 12px; }
   .catalog-grid .stay-location { align-items: flex-start; font-size: 10px; line-height: 1.35; }
   .catalog-grid .stay-location svg { width: 13px; height: 13px; }
@@ -588,15 +594,12 @@
   .why-icon svg { width: 19px; }
   .why-grid h3 { margin: 10px 0 4px; font-size: 13px; }
   .why-grid p { font-size: 11px; }
-  .agents-section .agent-design-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
-  .agents-section .agent-design-card { min-width: 0; border-radius: 10px; }
-  .agents-section .agent-design-image { aspect-ratio: 1; }
-  .agents-section .agent-design-card > div:last-child { min-height: 0; padding: 9px; }
-  .agents-section .agent-design-card .agent-position { font-size: 9px; }
-  .agents-section .agent-design-card h2 { overflow-wrap: anywhere; font-size: 12px; }
-  .agents-section .agent-design-card p { min-height: 0; font-size: 10px; }
-  .agents-section .agent-design-card .text-link { gap: 3px; margin-top: 8px; font-size: 10px; }
-  .agents-section .agent-design-card .text-link svg { width: 13px; }
+  .agents-section .agent-design-grid { display: flex; overflow-x: auto; gap: 10px; margin-inline: -16px; padding: 2px 20px 12px; scroll-padding-inline: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .agents-section .agent-design-grid::-webkit-scrollbar { display: none; }
+  .agents-section .agent-design-card { display: block; width: 56vw; max-width: 230px; flex: none; border-radius: 11px; scroll-snap-align: start; }
+  .reference-page .agent-design-grid { display: grid; grid-auto-columns: minmax(170px, 56vw); grid-auto-flow: column; grid-template-columns: none; grid-template-rows: repeat(2, auto); overflow-x: auto; gap: 10px; margin-inline: -16px; padding: 2px 20px 12px; scroll-padding-inline: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .reference-page .agent-design-grid::-webkit-scrollbar { display: none; }
+  .reference-page .agent-design-card { min-width: 0; scroll-snap-align: start; }
   .agent-design-card .text-link { font-size: 12px; }
   .faq-layout { grid-template-columns: 1fr; gap: 20px; }
   .faq-layout > div:first-child h2 { max-width: 22ch; font-size: 24px; }

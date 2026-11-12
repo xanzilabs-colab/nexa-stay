@@ -15,10 +15,10 @@ export function PropertyCard({ property }: { property: Property }) {
       {image ? <Image src={image.public_url} alt={image.alt_text || property.title} fill sizes="(max-width: 700px) 86vw, (max-width: 1100px) 45vw, 380px" /> : <span>Listing images coming soon</span>}
       {property.featured && <span className="stay-badge">Featured</span>}
       <span className="stay-image-count"><Camera size={14} />{property.images.length || 0}</span>
+      <span className="stay-image-price">{price}</span>
     </Link>
     <SaveStayButton propertyId={property.id} label={property.title} />
     <div className="stay-card-body">
-      <p className="stay-price">{price}</p>
       <h3><Link href={`/properties/${property.slug}`}>{property.title}</Link></h3>
       <p className="stay-location"><MapPin size={15} />{property.development_name}, {property.suburb}, {property.city}</p>
       <ul className="stay-specs">
