@@ -4,8 +4,11 @@ import { CalendarDays, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 type DatePickerProps = { name: string; label: string; value: string; onChange: (value: string) => void; min?: string; max?: string; disabled?: boolean };
-const dayMilliseconds = 86_400_000;
-function iso(date: Date) { return date.toISOString().slice(0, 10); }
+function iso(date: Date) {
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${date.getFullYear()}-${month}-${day}`;
+}
 function parse(value: string) { return new Date(`${value}T00:00:00`); }
 function display(value: string) { return value ? parse(value).toLocaleDateString("en-ZA", { day: "numeric", month: "short", year: "numeric" }) : "Select date"; }
 

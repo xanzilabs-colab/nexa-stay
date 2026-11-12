@@ -15,7 +15,5 @@ export async function getProperty(slug: string) { return (await getProperties())
 export async function getAgents() { const supabase = await createClient(); if (!supabase) return agents; const { data } = await supabase.from("agents").select("*").eq("active", true); return data?.length ? data : agents; }
 
 export async function getTeamAgents() {
-  const availableAgents = await getAgents();
-  const availableBySlug = new Map(availableAgents.map((agent) => [agent.slug, agent]));
-  return agents.map((fallbackAgent) => availableBySlug.get(fallbackAgent.slug) ?? fallbackAgent);
+  return getAgents();
 }

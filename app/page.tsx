@@ -172,7 +172,7 @@ export default async function Home() {
           <div><span className="eyebrow">HERE TO HELP</span><h2>Meet your local experts</h2><p>Our team knows these places and is ready to help you find the right fit.</p></div>
           <Link className="text-link" href="/agents">Meet all agents <ArrowRight /></Link>
         </div>
-        <AgentGrid agents={agents.slice(0, 5)} />
+        <AgentGrid agents={agents} />
       </div>
     </section>
 

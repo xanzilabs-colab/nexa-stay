@@ -4,11 +4,28 @@ import { ArrowRight, Building2, LoaderCircle, Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type FormEvent, useState } from "react";
+import { DatePicker } from "@/components/date-picker";
+
+function dateKey(date: Date) {
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${date.getFullYear()}-${month}-${day}`;
+}
+
+function addDays(value: string, days: number) {
+  const date = new Date(`${value}T12:00:00`);
+  date.setDate(date.getDate() + days);
+  return dateKey(date);
+}
 
 export function HeroSearch() {
   const router = useRouter();
   const [tab, setTab] = useState<"stay" | "owner">("stay");
   const [searching, setSearching] = useState(false);
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const today = dateKey(new Date());
+
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSearching(true);
@@ -27,8 +44,8 @@ export function HeroSearch() {
     {tab === "stay" ? <>
       <form className="search-bar" onSubmit={submit}>
         <label><span>Where</span><select name="development" defaultValue="all"><option value="all">All developments</option><option value="ellipse">Ellipse · Waterfall City</option><option value="munyaka">Munyaka · Waterfall City</option><option value="the-blyde">The Blyde · Pretoria</option></select></label>
-        <label><span>Check-in</span><input name="checkIn" type="date" min={new Date().toISOString().slice(0, 10)} /></label>
-        <label><span>Check-out</span><input name="checkOut" type="date" min={new Date().toISOString().slice(0, 10)} /></label>
+        <div className="hero-search-date"><DatePicker name="checkIn" label="Check-in" value={checkIn} min={today} onChange={(value) => { setCheckIn(value); setCheckOut(""); }} /></div>
+        <div className="hero-search-date"><DatePicker name="checkOut" label="Check-out" value={checkOut} min={checkIn ? addDays(checkIn, 1) : today} max={checkIn ? addDays(checkIn, 5) : undefined} onChange={setCheckOut} /></div>
         <label><span>Guests</span><select name="guests" defaultValue="0"><option value="0">Any guests</option><option value="1">1+ guests</option><option value="2">2+ guests</option><option value="4">4+ guests</option><option value="6">6 guests</option></select></label>
         <button className="button button-teal" disabled={searching}>{searching ? <LoaderCircle className="button-spinner" size={18} /> : <Search size={18} />}{searching ? "Searching..." : "Search"}</button>
       </form>
