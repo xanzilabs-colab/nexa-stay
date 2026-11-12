@@ -554,6 +554,8 @@
   .stay-card-actions .button { min-height: 42px; }
   .catalog-grid .stay-card-image { aspect-ratio: 4 / 3; }
   .catalog-grid .stay-card-body { padding: 10px; }
+  .catalog-grid .stay-image-count { top: 10px; right: 55px; bottom: auto; left: auto; }
+  .catalog-grid .stay-image-price { background: rgb(255 255 255 / 50%); backdrop-filter: blur(6px); }
   .catalog-grid .stay-image-price { right: 7px; bottom: 7px; padding: 5px 7px; font-size: 12px; }
   .catalog-grid .stay-image-price small { font-size: 8px; }
   .catalog-grid .stay-card h3 { font-size: 12px; }
@@ -564,6 +566,7 @@
   .catalog-grid .stay-specs svg { width: 13px; height: 13px; }
   .catalog-grid .stay-card-actions { gap: 5px; margin-top: 10px; }
   .catalog-grid .stay-card-actions .button { min-height: 37px; padding: 7px 5px; font-size: 10px; }
+  .catalog-grid .stay-card-actions { display: none; }
   .development-grid { display: flex; overflow-x: auto; gap: 11px; margin-inline: -16px; padding: 2px 20px 12px; scroll-padding-inline: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .development-grid::-webkit-scrollbar { display: none; }
   .development-tile { width: 70vw; max-width: 280px; min-height: 330px; flex: none; border-radius: 12px; scroll-snap-align: start; }
@@ -604,6 +607,7 @@
   .reference-page .agent-design-grid { display: grid; grid-auto-columns: minmax(170px, 56vw); grid-auto-flow: column; grid-template-columns: none; grid-template-rows: repeat(2, auto); overflow-x: auto; gap: 10px; margin-inline: -16px; padding: 2px 20px 12px; scroll-padding-inline: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .reference-page .agent-design-grid::-webkit-scrollbar { display: none; }
   .reference-page .agent-design-card { min-width: 0; scroll-snap-align: start; }
+  .agent-design-card p { display: none; }
   .agent-design-card .text-link { font-size: 12px; }
   .faq-layout { grid-template-columns: 1fr; gap: 20px; }
   .faq-layout > div:first-child h2 { max-width: 22ch; font-size: 24px; }
