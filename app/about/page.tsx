@@ -34,16 +34,6 @@ export default async function AboutPage() {
           <p>Whether you&apos;re visiting for work, taking time away, or settling into a new part of the city, NexaStay makes finding the right place feel simple.</p>
         </div>
       </section>
-      <section className="about-developments">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">WHERE WE STAY</p>
-            <h2>Rooted in Waterfall City.</h2>
-          </div>
-          <p>Our collection is focused on the developments people return to.</p>
-        </div>
-        <DevelopmentShowcase properties={properties} />
-      </section>
       <section className="about-principles">
         <p className="eyebrow">WHAT MATTERS TO US</p>
         <h2>The details make the stay.</h2>
@@ -56,6 +46,16 @@ export default async function AboutPage() {
             </article>
           ))}
         </div>
+      </section>
+      <section className="about-developments">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">WHERE WE STAY</p>
+            <h2>Rooted in Waterfall City.</h2>
+          </div>
+          <p>Our collection is focused on the developments people return to.</p>
+        </div>
+        <DevelopmentShowcase properties={properties} />
       </section>
       <section className="about-final">
         <p className="eyebrow light">FIND YOUR PLACE</p>

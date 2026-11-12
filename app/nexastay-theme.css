@@ -98,7 +98,9 @@
 .nexastay-theme .search-bar input,
 .nexastay-theme .search-bar select { width: 100%; min-width: 0; min-height: 30px; border: 0; outline: 0; background: transparent; color: var(--nx-ink); font-size: 13px; font-weight: 600; }
 .nexastay-theme .search-bar select { cursor: pointer; }
-.nexastay-theme .search-bar input[type="date"] { font-size: 12px; }
+.nexastay-theme .search-bar input[type="date"] { color: var(--nx-ink); color-scheme: light; font-size: 12px; opacity: 1; -webkit-text-fill-color: var(--nx-ink); }
+.nexastay-theme .search-bar input[type="date"]::-webkit-datetime-edit { color: var(--nx-ink); }
+.nexastay-theme .search-bar input[type="date"]::-webkit-calendar-picker-indicator { opacity: 1; }
 .nexastay-theme .search-bar > button { align-self: stretch; padding-inline: 22px; }
 .quick-links { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 0 21px 14px; color: var(--nx-muted); font-size: 12px; }
 .quick-links a { color: var(--nx-teal-dark); font-weight: 700; }
@@ -370,6 +372,13 @@
 .about-image { position: relative; min-height: 390px; overflow: hidden; border-radius: 12px; background: var(--nx-teal-tint); }
 .about-image img { object-fit: cover; }
 .about-principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
+.nexastay-theme .about-page .about-principles { display: block; padding: 100px 12%; }
+.nexastay-theme .about-page .about-principles > h2 { margin: 8px 0 0; font-size: clamp(32px, 4vw, 52px); }
+.nexastay-theme .about-page .about-principles > div { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 45px; margin-top: 42px; }
+.nexastay-theme .about-page .about-principles article { display: block; }
+.nexastay-theme .about-page .about-principles article svg { color: var(--nx-teal); }
+.nexastay-theme .about-page .about-principles h3 { margin: 13px 0 8px; }
+.nexastay-theme .about-page .about-principles article p { max-width: none; color: var(--nx-muted); font-size: 13px; line-height: 1.6; }
 .about-principles article { min-width: 0; }
 .about-principles h3 { margin: 15px 0 6px; font-size: 17px; }
 .about-principles p { max-width: 34ch; margin: 0; color: var(--nx-muted); font-size: 13px; }
@@ -421,6 +430,11 @@
 .contact-enquiry-form .button-whatsapp:hover { background: #0e7a40; }
 .contact-email-fallback { grid-column: 1 / -1; margin: -4px 0 0; color: var(--nx-muted); font-size: 13px; text-align: center; }
 .contact-email-fallback a { color: var(--nx-teal-dark); font-weight: 700; }
+.nexastay-theme .date-picker-trigger { color: var(--nx-ink); background: #fff; color-scheme: light; }
+.nexastay-theme .date-picker-trigger > span { color: var(--nx-ink); }
+.nexastay-theme .date-picker-trigger small { color: var(--nx-muted); }
+.nexastay-theme .reference-card { grid-template-columns: minmax(0, 1fr) auto; }
+.nexastay-theme .reference-card > strong { min-width: 0; max-width: 100%; overflow-wrap: anywhere; word-break: break-word; font-size: clamp(14px, 4vw, 18px); letter-spacing: .04em; }
 /* Tablet */
 @media (max-width: 1100px) {
   .nexastay-theme .search-bar { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -479,7 +493,8 @@
   .nexastay-theme .search-bar label > span { font-size: 10px; }
   .nexastay-theme .search-bar input,
   .nexastay-theme .search-bar select { min-height: 27px; font-size: 14px; }
-  .nexastay-theme .search-bar input[type="date"] { font-size: 12px; }
+  .nexastay-theme .search-bar input[type="date"] { width: 100%; min-width: 0; max-width: 100%; padding-inline: 2px; font-size: 13px; }
+  .nexastay-theme .search-bar input[type="date"]::-webkit-datetime-edit { padding: 0; }
   .nexastay-theme .search-bar > button { grid-column: 1 / -1; min-height: 45px; margin-top: 0; }
   .quick-links { overflow-x: auto; flex-wrap: nowrap; gap: 7px; padding: 0 12px 12px; font-size: 10px; scrollbar-width: none; }
   .quick-links a { flex: none; border-radius: 99px; padding: 6px 9px; background: var(--nx-teal-tint); }
@@ -630,11 +645,8 @@
   .contact-design-layout { grid-template-columns: 1fr; gap: 24px; }
   .about-split h2 { font-size: 25px; }
   .about-image { min-height: 0; aspect-ratio: 4 / 3; }
-  .about-principles { grid-template-columns: 1fr; gap: 20px; }
-  .about-principles article { display: grid; grid-template-columns: 42px 1fr; column-gap: 12px; align-items: center; }
-  .about-principles .why-icon { grid-row: span 2; }
-  .about-principles h3 { margin: 0 0 2px; font-size: 14px; }
-  .about-principles p { font-size: 11px; }
+  .nexastay-theme .about-page .about-principles { padding: 65px 20px; }
+  .nexastay-theme .about-page .about-principles > div { grid-template-columns: 1fr; gap: 25px; margin-top: 30px; }
   .contact-design-section { padding: 28px 0 50px; }
   .contact-design-layout { gap: 26px; }
   .contact-form-wrap { padding: 20px; }

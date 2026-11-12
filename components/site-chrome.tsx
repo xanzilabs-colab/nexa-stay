@@ -23,6 +23,37 @@ export function Header() {
   const [savedCount, setSavedCount] = useState(0);
   const logoClicks = useRef(0);
   const logoTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const previousPathname = useRef(pathname);
+  const historyNavigation = useRef<string | null>(null);
+
+  useEffect(() => {
+    const markHistoryNavigation = () => {
+      historyNavigation.current = window.location.href;
+    };
+    window.addEventListener("popstate", markHistoryNavigation);
+    return () => window.removeEventListener("popstate", markHistoryNavigation);
+  }, []);
+
+  useEffect(() => {
+    if (previousPathname.current === pathname) return;
+    previousPathname.current = pathname;
+    if (historyNavigation.current === window.location.href) {
+      historyNavigation.current = null;
+      return;
+    }
+    historyNavigation.current = null;
+    if (window.location.hash) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      const heading = document.querySelector<HTMLElement>("main h1");
+      if (heading) {
+        heading.tabIndex = -1;
+        heading.focus({ preventScroll: true });
+      }
+      window.scrollTo(0, 0);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname]);
 
   useEffect(() => {
     const updateSavedCount = () => {
